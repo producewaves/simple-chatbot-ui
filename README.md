@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# シンプルチャットボットUI
 
-## Getting Started
+Next.jsベースのシンプルなチャットボットUIで、Dify APIと連携してAI機能を提供します。
 
-First, run the development server:
+## 特徴
+
+- **レスポンシブデザイン**: すべてのデバイスで最適に表示
+- **リアルタイム対話**: AIとの自然な対話体験
+- **Dify API連携**: 高度なAI機能の活用
+- **簡単カスタマイズ**: 用途に応じてカスタマイズ可能
+- **TypeScript対応**: 型安全な開発
+
+## 技術スタック
+
+- **フレームワーク**: Next.js 15
+- **言語**: TypeScript
+- **スタイリング**: Tailwind CSS
+- **AI API**: Dify
+- **開発ツール**: ESLint
+
+## セットアップ
+
+### 1. 依存関係のインストール
+
+```bash
+npm install
+```
+
+### 2. 環境変数の設定
+
+`.env.local.example`を`.env.local`にコピーして、Dify APIの設定を行います：
+
+```bash
+cp .env.local.example .env.local
+```
+
+`.env.local`ファイルを編集：
+
+```env
+# Dify API設定
+NEXT_PUBLIC_DIFY_API_URL=https://api.dify.ai/v1
+NEXT_PUBLIC_DIFY_API_KEY=your-dify-api-key-here
+```
+
+### 3. 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてアプリケーションを確認できます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Dify APIの設定方法
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. [Dify](https://dify.ai/)にアカウント登録またはログイン
+2. 新しいアプリを作成または既存のアプリを選択
+3. アプリの設定画面からAPIキーを取得
+4. `.env.local`ファイルに以下を設定：
+   - `NEXT_PUBLIC_DIFY_API_URL`: DifyのAPIエンドポイント
+   - `NEXT_PUBLIC_DIFY_API_KEY`: 取得したAPIキー
 
-## Learn More
+## 使用方法
 
-To learn more about Next.js, take a look at the following resources:
+1. アプリケーションを起動
+2. 右下のチャットボタンをクリック
+3. チャットウィンドウが開いたら質問を入力
+4. Enterキーまたは送信ボタンでメッセージを送信
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## カスタマイズ
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### チャットボットのスタイル変更
 
-## Deploy on Vercel
+`src/components/Chatbot.tsx`ファイルでUIのカスタマイズが可能です：
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- カラーテーマの変更
+- レイアウトの調整
+- アニメーション効果の追加
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### API連携のカスタマイズ
+
+`src/services/difyService.ts`ファイルでAPI連携の詳細設定が可能です：
+
+- リクエスト形式の変更
+- レスポンス処理のカスタマイズ
+- エラーハンドリングの改善
+
+## プロジェクト構造
+
+```
+src/
+├── app/
+│   ├── globals.css          # グローバルスタイル
+│   ├── layout.tsx           # レイアウトコンポーネント
+│   └── page.tsx            # メインページ
+├── components/
+│   └── Chatbot.tsx         # チャットボットコンポーネント
+└── services/
+    └── difyService.ts      # Dify API連携サービス
+```
+
+## 本番環境デプロイ
+
+### Vercelでのデプロイ
+
+1. [Vercel](https://vercel.com)にアカウント作成
+2. プロジェクトをインポート
+3. 環境変数を設定
+4. デプロイ実行
+
+## トラブルシューティング
+
+### よくある問題
+
+1. **チャットボットが応答しない**
+   - `.env.local`ファイルの設定を確認
+   - DifyのAPIキーが正しいか確認
+   - ネットワーク接続を確認
+
+2. **開発サーバーが起動しない**
+   - Node.jsのバージョンを確認（Node.js 18以上推奨）
+   - `npm install`を再実行
+   - ポート3000が使用されていないか確認
+
+3. **スタイルが正しく表示されない**
+   - ブラウザのキャッシュをクリア
+   - Tailwind CSSの設定を確認
+
+## ライセンス
+
+このプロジェクトはMITライセンスの下で公開されています。
+# simple-chatbot-ui
