@@ -237,6 +237,7 @@ p,h1,h2,h3,ul,ol{margin:0}
 .drawer h2{font-size:clamp(19px,1.9cqw,28px);line-height:1.4;margin:.6em 0 .8em;clear:both}
 .drawer h3{font-size:clamp(14px,1.25cqw,18px);color:var(--teal);margin:1.1em 0 .3em}
 .drawer p,.drawer li{font-size:clamp(13px,1.12cqw,16px);line-height:1.75}
+.drawer a{color:#0a6b67}
 .drawer ul{padding-left:1.2em}
 .drawer .d-note{margin-top:1.4em;border-top:1px solid var(--line);padding-top:.9em;font-size:clamp(12px,.98cqw,14px);color:var(--mute)}
 .panel{display:none;position:absolute;inset:6% 7%;z-index:7;background:#fff;border-radius:14px;box-shadow:0 12px 50px #0a1e2899;padding:2.2cqw 2.6cqw;overflow-y:auto}
@@ -250,6 +251,34 @@ p,h1,h2,h3,ul,ol{margin:0}
 .panel .grp button i{font-style:normal;color:var(--mute);margin-right:.5em;font-variant-numeric:tabular-nums}
 .panel .grp button[aria-current="true"] i{color:var(--mint)}
 .panel .keys{margin-top:1em;color:var(--mute);font-size:13px}
+
+
+/* market comparison */
+.ranges{display:grid;grid-template-columns:19cqw 1fr 12cqw;column-gap:1.4cqw;row-gap:.9cqw;align-items:center}
+.ranges .axis{grid-column:2;position:relative;height:1.6cqw;font-size:var(--fs-tiny);color:var(--mute)}
+.ranges .axis span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.ranges .axis span:first-child{transform:none}.ranges .axis span:last-child{transform:translateX(-100%)}
+.ranges .name{grid-column:1;font-size:var(--fs-small);line-height:1.4}
+.ranges .track{grid-column:2}.ranges .val{grid-column:3}
+.ranges .name b{display:block;font-size:var(--fs-body)}
+.ranges .track{position:relative;height:2.3cqw;background:repeating-linear-gradient(90deg,transparent 0 calc(33.333% - 1px),var(--line) calc(33.333% - 1px) 33.333%);border-left:1px solid var(--line)}
+.ranges .track::after{content:"";position:absolute;left:33.333%;top:-.5cqw;bottom:-.5cqw;border-left:2px dashed var(--amber)}
+.ranges .rng{position:absolute;top:.35cqw;bottom:.35cqw;background:#9ab1b4;border-radius:99px}
+.ranges .val{font-size:var(--fs-small);font-weight:700;color:var(--navy);white-space:nowrap}
+.ranges .val small{display:block;font-weight:400;color:var(--mute);font-size:var(--fs-tiny)}
+.ranges .ours{grid-column:2;font-size:var(--fs-tiny);color:var(--amber);font-weight:700;padding-left:calc(33.333% - 1.6cqw)}
+.offer{display:flex;align-items:center;gap:1.6cqw;background:var(--navy);color:#fff;border-radius:12px;padding:1cqw 1.8cqw;font-size:var(--fs-small)}
+.offer strong{font-size:var(--fs-title);color:var(--mint);white-space:nowrap}
+.offer span{color:#d7e8ea}
+.hire{display:grid;grid-template-columns:1.15fr 1fr;gap:1.6cqw;align-items:stretch}
+.costs{display:flex;flex-direction:column;gap:.8cqw}
+.cost{display:grid;grid-template-columns:1fr auto;gap:.2cqw 1.2cqw;align-items:baseline;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.9cqw 1.3cqw}
+.cost b{font-size:var(--fs-body)}
+.cost strong{font-size:2.2cqw;color:var(--navy);white-space:nowrap;text-align:right}
+.cost strong small{font-size:.5em;margin-left:.15em;color:var(--mute)}
+.cost p{grid-column:1/-1;font-size:var(--fs-tiny);color:var(--mute);line-height:1.55}
+.feecalc{display:flex;flex-direction:column;gap:.8cqw}
+.feecalc .inputs label{grid-template-columns:1fr 8cqw 3.2cqw}
 
 /* ---- phone ---- */
 @media (max-width:800px){
@@ -288,6 +317,9 @@ p,h1,h2,h3,ul,ol{margin:0}
   .decide{gap:10px}.decide div{grid-template-columns:30px 1fr;gap:10px;padding:10px 12px}.decide div::before{width:28px;height:28px}
   .closing{flex-direction:column;align-items:flex-start;gap:6px;padding:14px 16px}
   .more{padding:10px 16px}
+  .ranges{grid-template-columns:1fr auto;row-gap:6px;grid-auto-flow:row dense}.ranges .axis,.ranges .ours{grid-column:1/-1}.ranges .name{grid-column:1}.ranges .val{grid-column:2;grid-row:auto;text-align:right}.ranges .track{grid-column:1/-1;height:18px;margin-bottom:8px}.ranges .track::after{top:-4px;bottom:-4px}.ranges .rng{top:3px;bottom:3px}.ranges .axis{height:18px}.ranges .ours{padding-left:0}
+  .offer{flex-direction:column;align-items:flex-start;gap:4px;padding:14px 16px}
+  .hire{grid-template-columns:1fr}.cost{padding:12px 14px}.cost strong{font-size:22px}.feecalc .inputs label{grid-template-columns:1fr 96px 36px}
   .drawer{position:fixed;width:100%;padding:18px 18px 28px}
   .panel{position:fixed;inset:0;border-radius:0;padding:18px}
   .panel .grp{grid-template-columns:1fr 1fr;gap:12px}
@@ -381,8 +413,8 @@ p,h1,h2,h3,ul,ol{margin:0}
     <div class="map" role="group" aria-label="4つの支援">
       <button class="stage main" data-go="4"><span class="when">いま最優先</span><strong>集客</strong><span>自社サイト・検索・AI検索・SNSから、住宅相談につなげる</span><em>詳しく ›</em></button>
       <button class="stage" data-go="6"><span class="when">人が必要になったら</span><strong>採用</strong><span>採用ページ・求人媒体・SNSで応募の入口を整える</span><em>詳しく ›</em></button>
-      <button class="stage" data-go="7"><span class="when">案件が増えてきたら</span><strong>業務効率化</strong><span>顧客・案件・原価・契約・着金の管理をExcelから整理</span><em>詳しく ›</em></button>
-      <button class="stage learn" data-go="8"><span class="when">社内にAIを根づかせる</span><strong>企業研修・個別研修</strong><span>生成AI講座・Claude Code講座で、自社で改善できる状態へ</span><em>詳しく ›</em></button>
+      <button class="stage" data-go="8"><span class="when">案件が増えてきたら</span><strong>業務効率化</strong><span>顧客・案件・原価・契約・着金の管理をExcelから整理</span><em>詳しく ›</em></button>
+      <button class="stage learn" data-go="9"><span class="when">社内にAIを根づかせる</span><strong>企業研修・個別研修</strong><span>生成AI講座・Claude Code講座で、自社で改善できる状態へ</span><em>詳しく ›</em></button>
     </div>
     <div class="legend">
       <div><b>AI顧問（月額10万円・今回の無償提供の対象）</b>集客・採用・業務効率化を、月1回の打合せで優先順位を決めながら当社が実務で支援します。</div>
@@ -460,7 +492,34 @@ p,h1,h2,h3,ul,ol{margin:0}
   </div>
 </section>
 
-<!-- 7 業務効率化 -->
+<!-- 採用の一般的な費用 -->
+<section class="slide" data-title="採用｜一般的な費用" data-group="支援内容">
+  <p class="kicker">支援2　採用　―　一般的な費用</p>
+  <h1 class="heading">採用を外部に頼ると、1人あたり100万円を超えることもあります。</h1>
+  <p class="sub">一般的な相場と比べると、自社で応募の入口を持っておく価値が見えてきます。</p>
+  <div class="body">
+    <div class="hire">
+      <div class="costs">
+        <div class="cost"><b>人材紹介の手数料</b><strong>30〜35<small>%</small></strong><p>採用した方の理論年収に対する成功報酬の料率として一般的な水準（例：年収400万円なら120〜140万円）</p></div>
+        <div class="cost"><b>中途採用1人あたりの平均採用コスト</b><strong>103.3<small>万円</small></strong><p>リクルート就職みらい研究所「就職白書2020」（2019年度実績）。企業規模・職種で大きく異なります</p></div>
+        <div class="cost"><b>採用代行（RPO）</b><strong>10〜20<small>万円／月</small></strong><p>最も多い価格帯。求人媒体の掲載費は別途かかるのが一般的です</p></div>
+        <p class="note">相場は各社が公開している情報をもとに当社で整理した目安です（2026年9月時点）。依頼内容・職種・地域により大きく変わります。</p>
+        <button class="more" data-detail="sources">数字の出典を見る ›</button>
+      </div>
+      <div class="feecalc card">
+        <p class="label">人材紹介を使った場合の試算</p>
+        <div class="inputs">
+          <label for="salary"><span>採用する方の想定年収<small>入力例</small></span><input id="salary" type="number" inputmode="numeric" min="0" step="10" value="400"><span class="unit">万円</span></label>
+          <label for="feeRate"><span>紹介手数料の料率<small>一般的な水準</small></span><input id="feeRate" type="number" inputmode="decimal" min="0" max="100" step="1" value="35"><span class="unit">%</span></label>
+        </div>
+        <div class="result"><small>1人採用した場合の紹介手数料（計算値）</small><strong id="outFee">140<span>万円</span></strong><p>想定年収 × 料率</p></div>
+        <p class="note">今回のAI顧問では、採用ページ・求人原稿・engage等・SNSの応募経路を整え、紹介会社だけに頼らない選択肢をつくります。応募数や採用を保証するものではありません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 業務効率化 -->
 <section class="slide" data-title="業務効率化｜Excelから整える" data-group="支援内容">
   <p class="kicker">支援3　業務効率化</p>
   <h1 class="heading">管理はExcelから。必要になった分だけ仕組みにします。</h1>
@@ -489,6 +548,28 @@ p,h1,h2,h3,ul,ol{margin:0}
     <div class="split">
       <p class="note"><b>研修の内容・回数・費用は別途ご相談です</b>（今回の無償提供の対象はAI顧問です）。研修を受ければすべての業務が自動化できるわけではなく、効果の出やすい業務から少しずつ取り組みます。</p>
       <button class="more" data-detail="course">研修後の活用例を見る ›</button>
+    </div>
+  </div>
+</section>
+
+<!-- 外注費用との比較 -->
+<section class="slide" data-title="一般的な外注費用との比較" data-group="数字と進め方">
+  <p class="kicker">数字と進め方　―　一般的な外注費用との比較</p>
+  <h1 class="heading">分野ごとに外注すると、1分野だけで月10万円前後かかることも。</h1>
+  <p class="sub">記事制作・SNS・採用・AI活用を、それぞれ専門会社に依頼した場合の一般的な月額費用です。</p>
+  <div class="body">
+    <div class="ranges" role="img" aria-label="外注した場合の月額費用の目安。記事制作月4本は約6〜20万円、SNS運用代行は約10〜30万円、採用代行は約10〜20万円、AI顧問は約5〜30万円。当社のAI顧問は通常月額10万円。">
+      <div class="axis"><span style="left:0">0円</span><span style="left:33.333%">10万円</span><span style="left:66.666%">20万円</span><span style="left:100%">30万円／月</span></div>
+      <div class="name"><b>SEO記事制作</b>月4本を外注（1本 約1.5〜5万円）</div><div class="track"><span class="rng" style="left:20%;width:46.7%"></span></div><div class="val">約6〜20万円<small>月4本の場合</small></div>
+      <div class="name"><b>SNS運用代行</b>戦略・分析を含む一般的なプラン</div><div class="track"><span class="rng" style="left:33.3%;width:66.7%"></span></div><div class="val">約10〜30万円<small>月額</small></div>
+      <div class="name"><b>採用代行（RPO）</b>求人媒体の掲載費は別途</div><div class="track"><span class="rng" style="left:33.3%;width:33.3%"></span></div><div class="val">約10〜20万円<small>月額・最多層</small></div>
+      <div class="name"><b>AI顧問・AI活用支援</b>中小企業向けの月額顧問型</div><div class="track"><span class="rng" style="left:16.7%;width:83.3%"></span></div><div class="val">約5〜30万円<small>月額</small></div>
+      <div class="ours">┆ 当社AI顧問の通常価格：月額10万円</div>
+    </div>
+    <div class="offer"><strong>通常月額10万円 → 事例協力で0円</strong><span>集客・採用・業務効率化の相談窓口を一つにまとめ、月1回の打合せで優先順位を決めて進めます。</span></div>
+    <div class="split">
+      <p class="note">相場は各社の公開情報を当社で整理した目安です（2026年9月時点）。当社は各分野の専門会社と同じ作業量をすべて提供するものではなく、月ごとに合意した範囲で対応します。</p>
+      <button class="more" data-detail="sources">数字の出典を見る ›</button>
     </div>
   </div>
 </section>
@@ -669,6 +750,14 @@ const details={
     ['3. 初期の準備','サイトの情報、問い合わせ導線、Google Analytics・Search Consoleなどの計測環境を確認し、現状の数字を記録します。'],
     ['4. 毎月の制作と改善','打合せ、制作、御社のご確認、公開、結果の共有を毎月繰り返します。']],
     note:'開始日程は、サイトの状態と必要な資料・権限のご準備状況に合わせて決めます。'},
+  sources:{kicker:'数字の出典',title:'一般的な費用の出典と注意点',sections:[
+    ['SEO記事制作','1本あたり約1.5〜5万円、コンテンツSEOの月額は5〜50万円程度とする情報が一般的です。<br>出典：<a href="https://web-kanji.com/posts/seo-price" target="_blank" rel="noopener">Web幹事「SEO対策の費用と相場」</a>、<a href="https://kaaan.jp/note/content-seo-cost" target="_blank" rel="noopener">KAAAN「コンテンツSEOの費用相場」</a>、<a href="https://btobmarketing-textbook.com/seo-article-cost/" target="_blank" rel="noopener">BtoBマーケティングの教科書「SEO記事制作の費用相場」</a>'],
+    ['SNS運用代行','戦略立案・分析を含む一般的なプランで月額10〜30万円が中心とする情報が一般的です。投稿代行のみなら安く、動画制作やコメント対応を含むと高くなります。<br>出典：<a href="https://boxil.jp/mag/a9435/" target="_blank" rel="noopener">BOXIL Magazine「SNS運用代行サービスの費用相場」</a>、<a href="https://www.lancers.jp/c/sns/sns-cost/13136/" target="_blank" rel="noopener">ランサーズ「SNS運用代行の費用相場」</a>、<a href="https://web-kanji.com/posts/sns-operating-price" target="_blank" rel="noopener">Web幹事「SNS運用代行会社の比較」</a>'],
+    ['採用代行（RPO）','月額10〜20万円が最多層。求人媒体の掲載費は別途かかるのが一般的です。<br>出典：<a href="https://boxil.jp/mag/a8409/" target="_blank" rel="noopener">BOXIL Magazine「採用代行（RPO）の費用相場」</a>、<a href="https://www.saiyo-doda.jp/guide/kihon/rpo-price" target="_blank" rel="noopener">doda「採用代行の費用相場」</a>'],
+    ['人材紹介の手数料','理論年収の30〜35%が一般的な料率です。<br>出典：<a href="https://www.r-agent.com/business/knowhow/article/28954/" target="_blank" rel="noopener">リクルートエージェント「人材紹介の手数料の相場」</a>、<a href="https://www.pa-consul.co.jp/talentpalette/TalentManagementLab/talent-referral-fee/" target="_blank" rel="noopener">タレントマネジメントラボ「人材紹介手数料の相場」</a>'],
+    ['中途採用1人あたりの採用コスト','103.3万円（2019年度実績）。<br>出典：リクルート就職みらい研究所「就職白書2020」（<a href="https://directscout.recruit.co.jp/biz/guide/article/2660/" target="_blank" rel="noopener">リクルートダイレクトスカウト「採用コストの平均相場」</a>で紹介）'],
+    ['AI顧問・AI活用支援','中小企業向けの月額顧問型で月額5〜30万円程度とする情報が一般的です。<br>出典：<a href="https://ai-ok.jp/ai-consulting-cost-2026/" target="_blank" rel="noopener">AI導入コンサル費用相場（ai-ok.jp）</a>、<a href="https://boostx-inc.com/blog/ai-advisor-monthly-cost/" target="_blank" rel="noopener">BoostX「AI顧問の費用相場」</a>']],
+    note:'いずれも各社が公開している相場情報を当社で整理した目安（2026年9月時点）で、特定の会社の見積りではありません。依頼内容・品質・地域・職種により大きく変わります。'},
   scope:{kicker:'事例協力の条件',title:'支援範囲と、事例掲載について',sections:[
     ['無償でご提供するもの','通常月額10万円のAI顧問を、合意した期間ご提供します。月1回の打合せと記事4本を基本に、FAQ・SNS原稿・問い合わせ導線の整備と計測・改善、採用・業務効率化の支援を、優先順位を決めて進めます。'],
     ['無償の対象に含まないもの','企業研修・個別研修（生成AI講座・Claude Code講座）、個別のシステム開発、広告費・求人媒体の掲載費・有料ツール等の実費。必要な場合は、着手前に内容と費用をご相談します。'],
@@ -747,7 +836,9 @@ function updateCalc(){
   if(w===null){document.getElementById('outWin').textContent='―';document.getElementById('outWinNote').textContent='成約率を入力すると表示します（問い合わせ数 × 成約率）';}
   else{document.getElementById('outWin').innerHTML=fmt(q*w/100)+'<span>件／月</span>';document.getElementById('outWinNote').textContent='問い合わせ数 × 成約率（小数は計算上の値です）';}
 }
-document.querySelectorAll('.inputs input').forEach(x=>x.addEventListener('input',updateCalc));
+document.querySelectorAll('.calc .inputs input').forEach(x=>x.addEventListener('input',updateCalc));
+function updateFee(){const sal=num('salary')??0,r=num('feeRate',100)??0;document.getElementById('outFee').innerHTML=fmt(sal*r/100)+'<span>万円</span>'}
+['salary','feeRate'].forEach(id=>document.getElementById(id).addEventListener('input',updateFee));updateFee();
 document.getElementById('resetCalc').onclick=()=>{Object.entries(DEFAULTS).forEach(([k,v])=>document.getElementById(k).value=v);updateCalc()};
 updateCalc();
 
