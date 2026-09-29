@@ -382,6 +382,13 @@ p,h1,h2,h3,ul,ol{margin:0}
   .dense .result{padding:.75cqw 1.3cqw}
   .dense .result strong{font-size:2.8cqw}
 }
+
+/* 5列版 */
+.pains.five{grid-template-columns:repeat(5,1fr);gap:.9cqw}
+.pains.five .card{padding:1.2cqw 1.2cqw}
+.map.five{grid-template-columns:1.25fr repeat(4,1fr);gap:.9cqw}
+.map.five .stage strong{font-size:1.75cqw}
+@media (max-width:800px){.pains.five,.map.five{grid-template-columns:1fr}.map.five .stage strong{font-size:20px}}
 </style>
 </head>
 <body>
@@ -391,10 +398,10 @@ p,h1,h2,h3,ul,ol{margin:0}
 <!-- 0 表紙 -->
 <section class="slide dark cover active" data-title="表紙" data-group="はじめに">
   <div class="cover-body">
-    <p class="kicker">AI顧問のご提案　―　イベントの集客・販促と、企画・制作の効率化</p>
-    <h1>イベントの「集める」と「形にする」を、<br>AIでもっと速く。</h1>
-    <p class="lead">告知・販促の文章づくり、打合せで出たイメージのモック作成、企画書や運営資料づくり。イベントの仕事で時間がかかる部分を、<strong>AI顧問（月額10万円）</strong>として一緒に効率化します。</p>
-    <div class="cover-tags"><span>集客</span><span>販促</span><span>モック作成</span><span>資料作り</span><span>研修</span></div>
+    <p class="kicker">AI顧問のご提案　―　イベント制作の依頼獲得と、企画・制作の効率化</p>
+    <h1>イベントの依頼を「集める」と、<br>イメージを「形にする」を、AIで。</h1>
+    <p class="lead">御社にイベントの依頼が集まる入口づくりと、販促物・モック・企画書づくりの効率化。この2つを<strong>AI顧問（月額10万円）</strong>として一緒に進めます。</p>
+    <div class="cover-tags"><span>集客（依頼獲得）</span><span>販促</span><span>モック作成</span><span>資料作り</span><span>研修</span></div>
   </div>
   <div class="cover-meta">
     <div class="to">株式会社Roden 様</div>
@@ -405,13 +412,13 @@ p,h1,h2,h3,ul,ol{margin:0}
 <!-- 1 要点 -->
 <section class="slide" data-title="ご提案の要点" data-group="はじめに">
   <p class="kicker">ご提案の要点</p>
-  <h1 class="heading">企画から告知、当日資料、事後レポートまで。AIを使う型を一緒につくります。</h1>
+  <h1 class="heading">依頼が集まる入口をつくり、受注後の制作もAIで速くします。</h1>
   <p class="sub">「何を支援するのか」「御社のメリット」「費用」を3点にまとめました。</p>
   <div class="body">
     <div class="points">
-      <article class="card point"><span class="no">当社が支援すること</span><h3>集客・販促、モック、資料作り</h3><p>月1回の定例で優先する業務を決め、告知文・販促物の案、イメージのモック、企画書や運営資料の下書きを、AIを使って当社が一緒につくります。</p></article>
-      <article class="card point"><span class="no">御社のメリット</span><h3>1案件あたりの制作時間を短く</h3><p>下書きと複数案づくりをAIに任せ、スタッフは判断と仕上げに集中できます。テンプレートとして残るので、次のイベントからは社内で回せます。</p></article>
-      <article class="card point"><span class="no">費用</span><h3>AI顧問　月額10万円</h3><p>まずは3か月、実際のイベント1〜2本を題材に取り組むご提案です。効果は作業時間と申込数で確認し、継続は振り返りのうえでご判断ください。</p></article>
+      <article class="card point"><span class="no">当社が支援すること</span><h3>依頼獲得と、制作の効率化</h3><p>実績紹介や解説記事を毎月つくり、検索・AI検索・SNSから相談が届く入口を整えます。受注後の販促物・モック・企画書づくりも、AIで速くする型をつくります。</p></article>
+      <article class="card point"><span class="no">御社のメリット</span><h3>紹介頼みから、指名で届く相談へ</h3><p>記事や実績ページは御社サイトに残り、営業の資料にもなります。制作の下書きと複数案はAIに任せ、スタッフは提案と仕上げに集中できます。</p></article>
+      <article class="card point"><span class="no">費用</span><h3>AI顧問　月額10万円</h3><p>まずは3か月のご提案です。効果は問い合わせ数と作業時間で確認し、継続は振り返りのうえでご判断ください。</p></article>
     </div>
     <div class="band">
       <div class="strike">AI顧問<br>月額</div>
@@ -422,65 +429,87 @@ p,h1,h2,h3,ul,ol{margin:0}
 </section>
 
 <!-- 2 課題 -->
-<section class="slide" data-title="イベントの仕事で時間がかかる所" data-group="はじめに">
-  <p class="kicker">はじめに　―　イベントの仕事で時間がかかる所</p>
-  <h1 class="heading">1本のイベントの裏には、文章とビジュアルと資料が大量にあります。</h1>
-  <p class="sub">イベント会社で一般的に発生する制作物を、流れに沿って並べました。どこに時間がかかっているかを、初回に伺いたいと考えています。</p>
+<section class="slide" data-title="イベント会社で時間がかかる所" data-group="はじめに">
+  <p class="kicker">はじめに　―　イベント会社で時間がかかる所</p>
+  <h1 class="heading">依頼を集めるところから事後報告まで、文章と資料が大量にあります。</h1>
+  <p class="sub">イベント会社で一般的に発生する仕事を、受注前から順に並べました。どこに時間がかかっているかを、初回に伺いたいと考えています。</p>
   <div class="body">
-    <div class="pains">
-      <article class="card pain"><span class="when">企画・受注前</span><h3>提案する</h3><ul><li>企画書・提案書</li><li>コンセプトやキービジュアルの案</li><li>会場・ブースのイメージ</li></ul><p class="cost-h"><b>毎回ゼロから</b>つくると、受注前の時間が膨らむ</p></article>
-      <article class="card pain"><span class="when">告知・募集</span><h3>集める</h3><ul><li>告知ページ・申込フォーム</li><li>SNS投稿・メール・バナー</li><li>出展者・スポンサーの募集資料</li></ul><p class="cost-h"><b>媒体ごとに書き分け</b>が必要で、本数が多い</p></article>
-      <article class="card pain"><span class="when">直前・当日</span><h3>運営する</h3><ul><li>進行台本・タイムテーブル</li><li>スタッフ配置・マニュアル</li><li>当日の案内・掲示物</li></ul><p class="cost-h"><b>変更のたびに</b>複数の資料を直す</p></article>
-      <article class="card pain"><span class="when">終了後</span><h3>振り返る</h3><ul><li>来場者数・申込経路の集計</li><li>アンケートの集計と分析</li><li>クライアント向け報告書</li></ul><p class="cost-h"><b>次の提案の材料</b>になるのに、後回しになりやすい</p></article>
+    <div class="pains five">
+      <article class="card pain"><span class="when">受注前</span><h3>依頼を集める</h3><ul><li>実績紹介・会社サイト</li><li>SNS・ブログの発信</li><li>問い合わせへの返信</li></ul><p class="cost-h"><b>本業が忙しいと</b>更新が止まり、紹介頼みになりやすい</p></article>
+      <article class="card pain"><span class="when">受注前</span><h3>提案する</h3><ul><li>企画書・提案書</li><li>キービジュアルの案</li><li>会場・ブースのイメージ</li></ul><p class="cost-h"><b>毎回ゼロから</b>つくると、受注前の時間が膨らむ</p></article>
+      <article class="card pain"><span class="when">告知・募集</span><h3>販促する</h3><ul><li>告知ページ</li><li>SNS投稿・バナー</li><li>出展者の募集資料</li></ul><p class="cost-h"><b>媒体ごとに書き分け</b>が必要で本数が多い</p></article>
+      <article class="card pain"><span class="when">直前・当日</span><h3>運営する</h3><ul><li>進行台本</li><li>スタッフマニュアル</li><li>当日の案内・掲示物</li></ul><p class="cost-h"><b>変更のたびに</b>複数の資料を直す</p></article>
+      <article class="card pain"><span class="when">終了後</span><h3>振り返る</h3><ul><li>来場者数の集計</li><li>アンケート分析</li><li>クライアント報告書</li></ul><p class="cost-h"><b>次の依頼の材料</b>なのに後回しになりやすい</p></article>
     </div>
-    <p class="callout">どの制作物も「下書き」「複数案づくり」「書き分け」「集計」の比率が高く、AIが得意とする作業です。判断と仕上げは人が行い、手を動かす部分を短くします。</p>
+    <p class="callout">どれも「下書き」「複数案」「書き分け」「集計」の比率が高く、AIが得意とする作業です。特に<b>終了後の報告書は、そのまま実績紹介の記事になり、次の依頼を集める材料</b>になります。</p>
   </div>
 </section>
 
 <!-- 3 全体像 -->
 <section class="slide" data-title="AI顧問の支援範囲" data-group="支援内容">
   <p class="kicker">AI顧問の支援範囲</p>
-  <h1 class="heading">集客・販促、モック作成、資料作りの3つを中心に支援します。</h1>
-  <p class="sub">月1回の定例で、次のイベントに合わせて優先順位を決めます。最初から大きなシステムはつくりません。</p>
+  <h1 class="heading">依頼を集める集客と、受注後の販促・モック・資料作りを支援します。</h1>
+  <p class="sub">月1回の定例で優先順位を決めます。最初から大きなシステムはつくりません。</p>
   <div class="body">
-    <div class="map" role="group" aria-label="4つの支援">
-      <button class="stage main" data-go="4"><span class="when">売上に直結</span><strong>集客・販促</strong><span>告知ページ・SNS・メール・バナーの文案を、媒体別・複数案でつくる</span><em>詳しく ›</em></button>
-      <button class="stage" data-go="6"><span class="when">受注と合意を早く</span><strong>モック作成</strong><span>打合せで出たイメージを、ビジュアル案や動く画面の試作にする</span><em>詳しく ›</em></button>
-      <button class="stage" data-go="7"><span class="when">毎回の手間を減らす</span><strong>資料作り</strong><span>企画書・運営マニュアル・事後レポートを、型とAIで速くつくる</span><em>詳しく ›</em></button>
-      <button class="stage learn" data-go="8"><span class="when">社内にAIを根づかせる</span><strong>企業研修・個別研修</strong><span>生成AI講座・Claude Code講座で、自社で回せる状態へ</span><em>詳しく ›</em></button>
+    <div class="map five" role="group" aria-label="5つの支援">
+      <button class="stage main" data-go="4"><span class="when">いま最優先</span><strong>集客</strong><span>実績紹介・解説記事で、検索・AI検索・SNSからイベントの依頼を集める</span><em>詳しく ›</em></button>
+      <button class="stage" data-go="6"><span class="when">クライアントの成果に</span><strong>販促</strong><span>担当するイベントの告知文・バナー文言を、媒体別・複数案でつくる</span><em>詳しく ›</em></button>
+      <button class="stage" data-go="7"><span class="when">受注と合意を早く</span><strong>モック作成</strong><span>打合せで出たイメージを、ビジュアル案や動く画面の試作にする</span><em>詳しく ›</em></button>
+      <button class="stage" data-go="8"><span class="when">毎回の手間を減らす</span><strong>資料作り</strong><span>企画書・運営マニュアル・報告書を、型とAIで速くつくる</span><em>詳しく ›</em></button>
+      <button class="stage learn" data-go="9"><span class="when">社内にAIを根づかせる</span><strong>研修</strong><span>生成AI講座・Claude Code講座で、自社で回せる状態へ</span><em>詳しく ›</em></button>
     </div>
     <div class="legend">
-      <div><b>AI顧問（月額10万円）</b>集客・販促、モック作成、資料作りを、実際のイベントを題材に当社が実務で支援し、使った手順をテンプレートとして残します。</div>
+      <div><b>AI顧問（月額10万円）</b>集客・販促・モック作成・資料作りを、月1回の定例で優先順位を決めながら当社が実務で支援し、使った手順をテンプレートとして残します。</div>
       <div><b>研修</b>実施内容・費用は別途ご相談します。</div>
     </div>
   </div>
 </section>
 
-<!-- 4 集客：届ける -->
-<section class="slide" data-title="集客・販促｜来てほしい人に届ける" data-group="支援内容">
-  <p class="kicker">支援1　集客・販促</p>
-  <h1 class="heading">来てほしい人に届き、迷わず申し込める状態をつくります。</h1>
-  <p class="sub">告知の「量」を増やすだけでなく、見た人がどう動くかで文章と導線を整えます。</p>
+<!-- 4 集客：見つけてもらう -->
+<section class="slide" data-title="集客｜依頼が集まる入口をつくる" data-group="支援内容">
+  <p class="kicker">支援1　集客（依頼獲得）</p>
+  <h1 class="heading">イベントを任せる会社を探している人に、御社が見つかる状態をつくります。</h1>
+  <p class="sub">SEO・AIO・LLMOは、専門用語よりも「発注担当者の行動がどう変わるか」でご説明します。</p>
   <div class="body">
     <dl class="rows">
-      <dt>告知ページ<small>LP・申込フォーム</small></dt><dd>日時・場所・見どころ・料金が一目で分かり、<b>読み終えた人がそのまま申し込める</b>ページ構成と文章にします。</dd>
-      <dt>SNS</dt><dd>Instagram・X・TikTok など媒体ごとの書き方で、<b>告知開始から直前まで投稿を途切れさせない</b>よう、投稿案をまとめてつくります。</dd>
-      <dt>メール・LINE</dt><dd>過去の来場者や出展者に、<b>告知・リマインド・お礼</b>を時期に合わせて届けます。</dd>
-      <dt>検索・AI検索<small>SEO／AIO</small></dt><dd>「東京 ○○ イベント 2026」などで調べた人や、ChatGPT等のAIで調べた人に、<b>イベント情報が見つかりやすい</b>よう情報を整理します。</dd>
-      <dt>計測</dt><dd>申込が<b>どの経路から来たか</b>が分かるよう、リンクと集計の仕組みを整えます。</dd>
+      <dt>検索<small>SEO</small></dt><dd>「展示会 ブース 運営 依頼」「企業イベント 企画会社 東京」などで調べた担当者が、<b>御社の実績や解説記事にたどり着く</b>よう、記事とページ構成を整えます。</dd>
+      <dt>AI検索<small>AIO／LLMO</small></dt><dd>ChatGPTやGoogleのAIに「イベント会社の選び方」などを聞いた人に、<b>御社の情報が参考として届きやすい</b>よう、質問と答えの形（FAQ）で整理します。</dd>
+      <dt>実績紹介</dt><dd>目的・規模・来場者数・工夫した点を事例記事にまとめ、<b>「この会社なら任せられる」と判断できる材料</b>にします。</dd>
+      <dt>SNS</dt><dd>現場の様子や実績を発信し、<b>興味を持った人が実績ページや相談窓口へ進める</b>ようにします。</dd>
+      <dt>問い合わせ導線</dt><dd>予算・時期・規模が決まっていなくても<b>気軽に相談できる</b>よう、相談フォームや案内文を整えます。</dd>
     </dl>
     <div class="split">
-      <p class="note">申込数や来場者数を保証するものではありません。経路ごとの申込数を計測し、次の告知とイベントに反映します。</p>
-      <button class="more" data-detail="promo">販促物の例を見る ›</button>
+      <p class="note">検索順位やAIの回答への掲載、問い合わせ数を保証するものではありません。アクセスと問い合わせを計測し、反応を見て改善します。</p>
+      <button class="more" data-detail="themes">記事テーマの例を見る ›</button>
     </div>
   </div>
 </section>
 
-<!-- 5 集客：1イベントの流れ -->
-<section class="slide" data-title="集客・販促｜1本のイベントでの流れ" data-group="支援内容">
-  <p class="kicker">支援1　集客・販促</p>
-  <h1 class="heading">1本のイベントで、告知開始から事後まで同じ流れで回します。</h1>
-  <p class="sub">イベントの概要を1枚にまとめるところから始め、そこから各媒体の文章をAIで展開します。数量は一例です。<span class="draft">案</span></p>
+<!-- 5 集客：毎月の流れ -->
+<section class="slide" data-title="集客｜毎月の制作と改善" data-group="支援内容">
+  <p class="kicker">支援1　集客（依頼獲得）</p>
+  <h1 class="heading">月1回の打合せから、記事4本と改善までを毎月回します。</h1>
+  <p class="sub">御社から伺った実績や現場の工夫を、当社が記事・FAQ・SNS原稿に仕立てて公開し、数字を見て改善します。</p>
+  <div class="body">
+    <ol class="cycle">
+      <li class="hl"><span class="n">1</span><strong>打合せ</strong><span class="q">月1<small>回</small></span><p>最近の実績、よく受ける相談、得意なイベントを伺いテーマを決定</p></li>
+      <li><span class="n">2</span><strong>記事制作</strong><span class="q">月4<small>本</small></span><p>実績紹介2本＋解説記事2本を目安に、構成・執筆・公開まで当社が担当</p></li>
+      <li><span class="n">3</span><strong>FAQ・SNS</strong><p>記事の内容を、よくある質問とSNS原稿に展開</p></li>
+      <li><span class="n">4</span><strong>営業にも活用</strong><p>実績記事を会社案内・提案書の実績ページに転用</p></li>
+      <li><span class="n">5</span><strong>計測・改善</strong><p>アクセスと問い合わせを確認し、翌月のテーマに反映</p></li>
+    </ol>
+    <div class="roles">
+      <div><b>当社が担当</b>記事・FAQ・SNS原稿の制作、公開作業、計測の設定、結果の共有と改善提案</div>
+      <div><b>御社にお願いすること</b>打合せへの参加、原稿の事実確認、写真・資料のご提供、実績掲載についてのクライアントへの確認</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 販促 -->
+<section class="slide" data-title="販促｜担当イベントの告知物づくり" data-group="支援内容">
+  <p class="kicker">支援2　販促（クライアントのイベント）</p>
+  <h1 class="heading">担当するイベントの告知物を、概要シート1枚からまとめて展開します。</h1>
+  <p class="sub">イベントの概要を1枚に整理し、そこから各媒体の文章をAIで書き分けます。数量は一例です。<span class="draft">案</span></p>
   <div class="body">
     <ol class="cycle">
       <li class="hl"><span class="n">1</span><strong>概要シート</strong><span class="q">1<small>枚</small></span><p>誰に・何を・なぜ来てほしいかを整理。以降の文章の元になる</p></li>
@@ -490,15 +519,19 @@ p,h1,h2,h3,ul,ol{margin:0}
       <li><span class="n">5</span><strong>事後</strong><span class="q">1<small>本</small></span><p>お礼の連絡、アンケート集計、報告書の下書き</p></li>
     </ol>
     <div class="roles">
-      <div><b>当社が担当</b>概要シートの整理、AIを使った文案・複数案の作成、媒体別の書き分け、計測の設定、結果の集計と改善提案</div>
-      <div><b>御社にお願いすること</b>イベント情報と過去の実績のご共有、案の選択と事実確認、写真・ロゴ等の素材のご提供</div>
+      <div><b>当社が担当</b>概要シートの型づくり、AIを使った文案・複数案の作成手順、媒体別の書き分け、申込経路の計測</div>
+      <div><b>御社のメリット</b>クライアントへの提案に「告知まで任せられる」を加えられ、少ない工数で対応できる</div>
+    </div>
+    <div class="split">
+      <p class="note">告知文は御社・クライアントのご確認を経て公開します。料金・日時・出演者などの事実関係は必ずご確認ください。</p>
+      <button class="more" data-detail="promo">販促物の例を見る ›</button>
     </div>
   </div>
 </section>
 
 <!-- 6 モック作成 -->
 <section class="slide" data-title="モック作成｜イメージを形にする" data-group="支援内容">
-  <p class="kicker">支援2　モック作成</p>
+  <p class="kicker">支援3　モック作成</p>
   <h1 class="heading">打合せで出た「こんな感じ」を、その日のうちに見える形にします。</h1>
   <p class="sub">言葉だけでは伝わりにくいイメージを、AIで素早く複数案にし、クライアントや社内との合意を早めます。</p>
   <div class="body">
@@ -517,7 +550,7 @@ p,h1,h2,h3,ul,ol{margin:0}
 
 <!-- 7 資料作り -->
 <section class="slide" data-title="資料作り｜型とAIで速くつくる" data-group="支援内容">
-  <p class="kicker">支援3　資料作り</p>
+  <p class="kicker">支援4　資料作り</p>
   <h1 class="heading">毎回ゼロからつくる資料を、型とAIの下書きに置き換えます。</h1>
   <p class="sub">過去の資料を材料にテンプレートをつくり、AIが下書きし、人が確認して仕上げる流れにします。</p>
   <div class="body">
@@ -541,13 +574,13 @@ p,h1,h2,h3,ul,ol{margin:0}
         </ul>
       </div>
     </div>
-    <p class="callout">この提案資料（16ページ・試算機能付き）も、当社がAIを活用して制作しています。同じ方法を御社の資料づくりに持ち込みます。</p>
+    <p class="callout">この提案資料（17ページ・試算機能付き）も、当社がAIを活用して制作しています。同じ方法を御社の資料づくりに持ち込みます。</p>
   </div>
 </section>
 
 <!-- 8 研修 -->
 <section class="slide" data-title="研修｜企業研修・個別研修" data-group="支援内容">
-  <p class="kicker">支援4　研修（学習・内製化）</p>
+  <p class="kicker">支援5　研修（学習・内製化）</p>
   <h1 class="heading">研修で、スタッフ一人ひとりがAIを使いこなせる状態へ。</h1>
   <p class="sub">AI顧問は「当社が一緒に進める」支援、研修は「御社が自分でできるようになる」ための支援です。</p>
   <div class="body">
@@ -565,25 +598,25 @@ p,h1,h2,h3,ul,ol{margin:0}
 <!-- 9 外注相場 -->
 <section class="slide dense" data-title="一般的な外注費用" data-group="数字と進め方">
   <p class="kicker">数字と進め方　―　一般的な外注費用</p>
-  <h1 class="heading">イベントの制作物を外注すると、1点ごとに費用がかかります。</h1>
-  <p class="sub">イベントでよく発生する制作物の、一般的な外注相場です。AIで下書きと複数案を社内でつくれると、外注は本制作に絞れます。</p>
+  <h1 class="heading">集客記事も制作物も、外注すると費用が積み上がります。</h1>
+  <p class="sub">依頼獲得のための記事制作と、イベントでよく発生する制作物の、一般的な外注相場です。</p>
   <div class="body">
     <div class="hire">
       <div class="costs">
-        <div class="cost"><b>告知ページ（LP）1本</b><strong>5〜100<small>万円</small></strong><p>中央値は約40万円とする調査も。構成・文章から依頼すると高くなります</p></div>
+        <div class="cost"><b>集客用のSEO記事 1本</b><strong>1.5〜5<small>万円</small></strong><p>月4本なら6〜20万円。取材や専門性の高い内容は高くなります</p></div>
         <div class="cost"><b>企画書・提案資料 1枚</b><strong>0.3〜1<small>万円</small></strong><p>構成から依頼する場合は、別途3〜8万円程度の企画構成費が目安</p></div>
         <div class="cost"><b>バナー 1点</b><strong>0.3〜3<small>万円</small></strong><p>構成案から依頼すると1点2〜5万円程度。媒体ごとにサイズ違いが必要</p></div>
         <div class="cost"><b>SNS運用代行</b><strong>10〜30<small>万円／月</small></strong><p>戦略・分析を含む一般的なプラン。投稿代行のみなら安くなります</p></div>
       </div>
       <div class="card" style="display:flex;flex-direction:column;gap:.8cqw">
-        <p class="label">例：1本のイベントで外注した場合</p>
-        <div class="cost"><b>提案資料 20枚</b><strong>6〜20<small>万円</small></strong><p>0.3〜1万円 × 20枚（企画構成費を除く）</p></div>
-        <div class="cost"><b>告知バナー 10点</b><strong>3〜30<small>万円</small></strong><p>0.3〜3万円 × 10点</p></div>
-        <div class="offer"><strong>AI顧問 月額10万円</strong><span>下書き・複数案・書き分けを社内で回せる状態をつくり、外注はプロに任せたい本制作に絞ります。</span></div>
+        <p class="label">例：1か月分を外注した場合</p>
+        <div class="cost"><b>集客記事 月4本</b><strong>6〜20<small>万円</small></strong><p>1.5〜5万円 × 4本</p></div>
+        <div class="cost"><b>提案資料 20枚 × 2件</b><strong>12〜40<small>万円</small></strong><p>0.3〜1万円 × 40枚（企画構成費を除く）</p></div>
+        <div class="offer"><strong>AI顧問 月額10万円</strong><span>集客記事の制作と、販促・モック・資料作りの効率化を1つの窓口で。外注はプロに任せたい本制作に絞れます。</span></div>
       </div>
     </div>
     <div class="split">
-      <p class="note">相場は各社の公開情報を当社で整理した目安です（2026年9月時点）。AIの下書きがプロの本制作を置き換えるわけではなく、品質・内容によって外注が適する場合もあります。</p>
+      <p class="note">相場は各社の公開情報を当社で整理した目安です（2026年9月時点）。当社は各分野の専門会社と同じ作業量をすべて提供するものではなく、月ごとに合意した範囲で対応します。AIの下書きがプロの本制作を置き換えるわけでもなく、品質・内容によって外注が適する場合もあります。</p>
       <button class="more" data-detail="sources">数字の出典を見る ›</button>
     </div>
   </div>
@@ -635,49 +668,49 @@ p,h1,h2,h3,ul,ol{margin:0}
 </section>
 
 <!-- 12 試算：集客 -->
-<section class="slide dense" data-title="集客の試算" data-group="数字と進め方">
-  <p class="kicker">数字と進め方　―　集客の試算</p>
-  <h1 class="heading">申込率が少し上がるだけで、来場者と売上はこれだけ変わります。</h1>
-  <p class="sub">告知ページの訪問数と申込率から計算します。御社の過去のイベントの数字でも確認できます。</p>
+<section class="slide dense" data-title="依頼獲得の試算" data-group="数字と進め方">
+  <p class="kicker">数字と進め方　―　依頼獲得の試算</p>
+  <h1 class="heading">問い合わせ率が少し上がるだけで、受注額はこれだけ変わります。</h1>
+  <p class="sub">御社サイトの訪問数・問い合わせ率・受注率から計算します。御社の実績の数字を入れて確認できます。</p>
   <div class="body">
     <div class="calc">
       <div class="inputs">
-        <label for="visits"><span>告知ページの訪問数<small>1本のイベント・仮の入力例</small></span><input id="visits" type="number" inputmode="numeric" min="0" step="500" value="5000"><span class="unit">人</span></label>
-        <label for="cvr"><span>いまの申込率<small>訪問 → 申込</small></span><input id="cvr" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="2"><span class="unit">%</span></label>
-        <label for="cvr2"><span>改善後の申込率<small>文章・導線の見直し後</small></span><input id="cvr2" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="2.5"><span class="unit">%</span></label>
-        <label for="attend"><span>来場率<small>申込 → 当日来場</small></span><input id="attend" type="number" inputmode="decimal" min="0" max="100" step="1" value="70"><span class="unit">%</span></label>
-        <label for="price"><span>来場者1人あたりの売上<small>チケット・物販など</small></span><input id="price" type="number" inputmode="numeric" min="0" step="100" value="1500"><span class="unit">円</span></label>
+        <label for="visits"><span>御社サイトの月間訪問数<small>仮の入力例</small></span><input id="visits" type="number" inputmode="numeric" min="0" step="100" value="1000"><span class="unit">件</span></label>
+        <label for="cvr"><span>いまの問い合わせ率<small>訪問 → 問い合わせ</small></span><input id="cvr" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="1"><span class="unit">%</span></label>
+        <label for="cvr2"><span>改善後の問い合わせ率<small>実績記事・導線の整備後</small></span><input id="cvr2" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="1.5"><span class="unit">%</span></label>
+        <label for="win"><span>受注率<small>問い合わせ → 受注</small></span><input id="win" type="number" inputmode="decimal" min="0" max="100" step="1" value="20"><span class="unit">%</span></label>
+        <label for="avg"><span>1案件あたりの平均受注額<small>御社の実績で入力</small></span><input id="avg" type="number" inputmode="numeric" min="0" step="10" value="50"><span class="unit">万円</span></label>
         <button class="reset" type="button" id="resetLead">入力例に戻す</button>
       </div>
       <div class="results" aria-live="polite">
-        <div class="result"><small>申込数（計算値）</small><strong id="outApply">100 → 125<span>件</span></strong><span class="delta" id="outApplyD">＋25件</span></div>
-        <div class="result"><small>来場者数（計算値）</small><strong id="outVisit">70 → 88<span>人</span></strong><span class="delta" id="outVisitD">＋18人</span></div>
-        <div class="result sub-r"><small>来場者からの売上（計算値）</small><strong id="outSales">105,000 → 131,250<span>円</span></strong><span class="delta" id="outSalesD">＋26,250円／イベント</span></div>
+        <div class="result"><small>月の問い合わせ数（計算値）</small><strong id="outInq">10 → 15<span>件／月</span></strong><span class="delta" id="outInqD">＋5件</span></div>
+        <div class="result"><small>月の受注数（計算値）</small><strong id="outWin">2 → 3<span>件／月</span></strong><span class="delta" id="outWinD">＋1件</span></div>
+        <div class="result sub-r"><small>月の受注額（計算値）</small><strong id="outSales">100 → 150<span>万円／月</span></strong><span class="delta" id="outSalesD">＋50万円／月</span></div>
       </div>
     </div>
-    <p class="note"><b>入力値はすべて仮の数字で、改善幅を保証するものではありません。</b>出展料・スポンサー収入を伴うイベントでは、来場者数の増加がそれらの単価の交渉材料にもなります。</p>
+    <p class="note"><b>入力値はすべて仮の数字で、問い合わせ数や受注を保証するものではありません。</b>記事による検索からの流入が増えるまでには時間がかかる場合があります。受注率・受注額・粗利は御社の実績をもとにご検討ください。</p>
   </div>
 </section>
 
 <!-- 13 進め方 -->
 <section class="slide" data-title="進め方｜3か月で実施する場合" data-group="数字と進め方">
   <p class="kicker">数字と進め方</p>
-  <h1 class="heading">まずは3か月、実際のイベントを題材に進めます。</h1>
+  <h1 class="heading">仮に3か月で実施すると、打合せ3回・集客記事12本です。</h1>
   <p class="sub">期間は御社と相談して決めます。以下は「3か月」とした場合の計画例です。<span class="draft">案</span></p>
   <div class="body">
     <div class="metrics">
       <div class="metric"><small>定例の打合せ</small><strong>3<span>回</span></strong><p>月1回 × 3か月。日々の相談はチャットで随時</p></div>
-      <div class="metric"><small>題材にするイベント</small><strong>1〜2<span>本</span></strong><p>告知から事後まで通して実践</p></div>
-      <div class="metric"><small>残すテンプレート</small><strong>3<span>種以上</span></strong><p>企画書・告知文・事後レポートなど</p></div>
+      <div class="metric"><small>集客記事</small><strong>12<span>本</span></strong><p>月4本 × 3か月（実績紹介・解説記事）</p></div>
+      <div class="metric"><small>残すテンプレート</small><strong>3<span>種以上</span></strong><p>企画書・告知文・報告書など。担当イベント1〜2本で実践</p></div>
       <div class="metric zero"><small>費用</small><strong>30<span>万円</span></strong><p>月額10万円 × 3か月<span class="draft">税別</span></p></div>
     </div>
     <div class="months">
-      <div><b>1か月目：棚卸しと準備</b>業務と作業時間の確認、対象イベントの選定、概要シートと企画書テンプレートの作成</div>
-      <div><b>2か月目：イベントで実践</b>告知文・バナー文言・モックをAIでつくり、公開。申込経路を計測</div>
-      <div><b>3か月目：振り返りと定着</b>作業時間と申込数の振り返り、事後レポートの型化、継続の判断</div>
+      <div><b>1か月目：準備と公開開始</b>現状の確認、計測の準備、問い合わせ導線の見直し、記事4本、企画書テンプレートの作成</div>
+      <div><b>2か月目：反応を見て改善</b>読まれた記事と問い合わせ経路を確認して改善、記事4本、担当イベントで販促・モックを実践</div>
+      <div><b>3か月目：振り返りと定着</b>問い合わせ数と作業時間の振り返り、記事4本、報告書の型化、継続の判断</div>
     </div>
     <div class="split">
-      <p class="note">毎月確認する数字：作業時間（1案件あたり）／告知ページの訪問数／申込数と申込率／つくった案の数。数字の変化はイベントの時期にも左右されます。</p>
+      <p class="note">毎月確認する数字：記事の公開本数／サイト訪問数／問い合わせ件数／1案件あたりの制作時間。検索からの流入や問い合わせの増加には、時間がかかる場合があります。</p>
       <button class="more" data-detail="start">開始までの流れを見る ›</button>
     </div>
   </div>
@@ -694,15 +727,15 @@ p,h1,h2,h3,ul,ol{margin:0}
         <h3>月額10万円に含むもの</h3>
         <ol>
           <li><b>月1回の定例とチャット相談</b>優先順位の決定、進め方の相談を随時受けます。</li>
-          <li><b>集客・販促、モック、資料作りの実務</b>文案・複数案・モック・下書きの作成と、テンプレート化。</li>
-          <li><b>計測と振り返り</b>作業時間と申込数を記録し、月ごとに結果と改善案を共有します。</li>
+          <li><b>集客記事 月4本と、制作の効率化</b>記事・FAQ・SNS原稿の制作と公開、販促・モック・資料作りの型づくり。</li>
+          <li><b>計測と振り返り</b>問い合わせ数と作業時間を記録し、月ごとに結果と改善案を共有します。</li>
         </ol>
       </div>
       <div class="card promise">
         <h3>当社がお約束すること</h3>
         <ol>
-          <li><b>効果を数字で確認</b>開始時の作業時間と申込数を記録し、支援後と比べます。</li>
-          <li><b>情報の扱いを最初に決める</b>お客様・出展者の個人情報や未公開情報をAIに入れる範囲を、開始前に取り決めます。</li>
+          <li><b>効果を数字で確認</b>開始時の問い合わせ数と作業時間を記録し、支援後と比べます。</li>
+          <li><b>情報の扱いを最初に決める</b>実績の掲載はクライアントの許可を得た範囲に限り、個人情報や未公開情報をAIに入れる範囲も開始前に取り決めます。</li>
           <li><b>成果物は御社のものに</b>作成したテンプレート・文案は、御社で自由にお使いいただけます。</li>
         </ol>
       </div>
@@ -721,14 +754,14 @@ p,h1,h2,h3,ul,ol{margin:0}
   <p class="sub">合意した内容は書面にまとめ、双方で確認してから支援を始めます。</p>
   <div class="body">
     <div class="decide">
-      <div><p><b>開始時期と、題材にするイベント</b><span>告知開始が1〜2か月先のイベントが取り組みやすい</span></p></div>
-      <div><p><b>最初に優先する業務</b><span>集客・販促、モック作成、資料作りのどこから始めるか</span></p></div>
-      <div><p><b>いまの作業時間と数字の共有</b><span>1案件あたりの制作時間、過去の申込数・来場者数</span></p></div>
-      <div><p><b>お使いのツールとアカウント</b><span>Google／Microsoft、デザインツール、申込サービスなど</span></p></div>
-      <div><p><b>お客様・出展者情報の取り扱い</b><span>AIに入れてよい情報の範囲、社外秘の扱い</span></p></div>
-      <div><p><b>研修の要否と時期</b><span>全員向けの企業研修、担当者向けの個別研修</span></p></div>
+      <div><p><b>開始時期と、最初の集客テーマ</b><span>得意なイベントの種類、狙いたい業界・地域・案件規模</span></p></div>
+      <div><p><b>記事として掲載できる実績</b><span>クライアントの許可、写真・数値の掲載範囲</span></p></div>
+      <div><p><b>いまの数字の共有</b><span>サイト訪問数、問い合わせ数、受注率、1案件あたりの制作時間</span></p></div>
+      <div><p><b>サイトとツールの権限</b><span>サイトの編集権限、Google Analytics・Search Console、お使いの制作ツール</span></p></div>
+      <div><p><b>販促・モックで題材にするイベント</b><span>告知開始が1〜2か月先の案件が取り組みやすい</span></p></div>
+      <div><p><b>情報の取り扱いと研修の要否</b><span>AIに入れてよい情報の範囲、研修の対象と時期</span></p></div>
     </div>
-    <div class="closing"><strong>まずは、直近のイベントのお話を伺うところから。</strong><span>ご不明な点・ご要望は、この場でお気軽にお知らせください。</span></div>
+    <div class="closing"><strong>まずは、得意なイベントと最近の実績を伺うところから。</strong><span>ご不明な点・ご要望は、この場でお気軽にお知らせください。</span></div>
   </div>
 </section>
 
@@ -773,19 +806,24 @@ document.getElementById('panelGroups').innerHTML=Object.entries(groups).map(([g,
 /* 詳細ドロワーの中身 */
 const a=(href,text)=>'<a href="'+href+'" target="_blank" rel="noopener">'+text+'</a>';
 const details={
-  promo:{kicker:'支援1　集客・販促',title:'販促物の例',sections:[
+  themes:{kicker:'支援1　集客（依頼獲得）',title:'記事テーマの例',sections:[
+    ['実績紹介（事例記事）','「来場者○○人の展示会ブースを、準備期間○週間で運営した事例」のように、依頼の目的・規模・工夫・結果をまとめます。発注を検討している担当者が、自社の案件と重ねて読める形にします。'],
+    ['発注担当者の疑問に答える解説記事','「イベント会社の選び方と比較のポイント」「展示会出展の準備スケジュール」「社内イベントの費用の目安と内訳」「イベント会社に相談する前に決めておくこと」など、依頼前の不安を減らす記事です。'],
+    ['相談につなげるページ','「ご相談から当日までの流れ」「よくあるご質問」「予算・時期が未定でも相談できること」をまとめ、問い合わせに進みやすくします。']],
+    note:'テーマは例です。得意なイベントの種類や狙いたい業界を打合せで伺って決めます。実績の掲載はクライアントの許可を得た範囲で行います。'},
+  promo:{kicker:'支援2　販促',title:'販促物の例',sections:[
     ['告知ページ','キャッチコピー3案、見どころの説明、よくある質問、アクセス案内、申込ボタン周りの文言。スマートフォンで読みやすい長さに整えます。'],
     ['SNS・バナー','告知開始・出展者紹介・見どころ紹介・カウントダウン・当日の様子など、時期ごとの投稿テーマと文案。バナーに入れる短い文言も媒体のサイズ別に用意します。'],
     ['メール・LINE','過去の来場者への告知、申込者へのリマインド、来場のお礼とアンケートのお願い。'],
     ['出展者・スポンサー向け','募集の案内文、出展者が自分のSNSで使える告知文のひな形。出展者にも告知を広げてもらいやすくします。']],
     note:'文案は御社のご確認を経て公開します。料金・日時・出演者などの事実関係は、必ず御社でご確認ください。'},
-  mock:{kicker:'支援2　モック作成',title:'モックの例',sections:[
+  mock:{kicker:'支援3　モック作成',title:'モックの例',sections:[
     ['キービジュアル案','コンセプトを言葉で整理し、色・雰囲気・モチーフの違う案を画像生成でつくります。デザイナーへの依頼時の参考資料になります。'],
     ['会場・ブースのイメージ','会場の広さや導線の条件をもとに、配置の考え方と雰囲気のイメージを用意し、クライアントとの打合せで使います。正確な図面や施工図は専門の会社が作成します。'],
     ['告知ページ・申込画面の試作','実際にスマートフォンで触れる画面の試作を短時間でつくり、構成や文言を確かめてから本制作に進みます。'],
     ['グッズ・ノベルティ案','イベントの世界観に合う品目や使い方のアイデアを、イメージ画像つきで複数案出します。']],
     note:'AIで生成した画像は、イメージ共有を目的としたものです。外部に公開する場合は、権利・表現を確認したうえで使用します。'},
-  course:{kicker:'支援4　研修',title:'研修後の活用例と、AI顧問との組み合わせ',sections:[
+  course:{kicker:'支援5　研修',title:'研修後の活用例と、AI顧問との組み合わせ',sections:[
     ['御社の仕事を題材に','告知文の作成、企画書の下書き、打合せメモの整理、アンケート集計など、実際のイベントの業務を題材に演習します。'],
     ['日常の改善は御社で','指示の出し方と確認の考え方を身につけ、担当者が自分の業務で試しながら改善できる状態を目指します。'],
     ['難しい部分はAI顧問として伴走','申込サービスとの連携や、複数の資料をまとめて更新する仕組みなど、設計が難しい部分は当社が支援します。']],
@@ -797,12 +835,13 @@ const details={
     ['出典',a('https://www.hbs.edu/faculty/Pages/item.aspx?num=64700','Dell\'Acqua et al. "Navigating the Jagged Technological Frontier" Harvard Business School Working Paper 24-013（2023）')]],
     note:'他業種での実験結果で、御社の業務で同じ効果が出ることを示すものではありません。'},
   start:{kicker:'数字と進め方',title:'ご相談から開始までの流れ',sections:[
-    ['1. 現状の確認','直近のイベント予定、制作物の種類と作業時間、告知の経路、お使いのツールを伺います。'],
+    ['1. 現状の確認','いまの問い合わせの経路（紹介・サイト・SNSなど）、得意なイベント、掲載できる実績、制作物の種類と作業時間を伺います。'],
     ['2. 条件の合意','期間、題材にするイベント、支援の範囲、情報の取り扱いルールを書面で確認します。'],
-    ['3. 初期の準備','過去の企画書・告知文・報告書をお預かりしてテンプレートの材料にし、申込経路の計測を準備します。現状の作業時間を記録します。'],
-    ['4. 毎月の実践と振り返り','定例で優先業務を決め、制作・公開・計測・振り返りを繰り返します。']],
-    note:'開始日程は、題材にするイベントの告知スケジュールに合わせて決めます。'},
+    ['3. 初期の準備','サイトの状態と問い合わせ導線、Google Analytics・Search Consoleなどの計測環境を確認し、現状の数字を記録します。過去の企画書・報告書をお預かりしてテンプレートの材料にします。'],
+    ['4. 毎月の制作と改善','定例でテーマと優先業務を決め、記事の制作・公開と、販促・モック・資料作りの実践、結果の共有を毎月繰り返します。']],
+    note:'開始日程は、サイトの状態と必要な資料・権限のご準備状況に合わせて決めます。'},
   sources:{kicker:'数字の出典',title:'一般的な費用の出典と注意点',sections:[
+    ['SEO記事制作','1本あたり約1.5〜5万円、コンテンツSEOの月額は5〜50万円程度とする情報が一般的です。<br>出典：'+a('https://web-kanji.com/posts/seo-price','Web幹事「SEO対策の費用と相場」')+'、'+a('https://kaaan.jp/note/content-seo-cost','KAAAN「コンテンツSEOの費用相場」')+'、'+a('https://btobmarketing-textbook.com/seo-article-cost/','BtoBマーケティングの教科書「SEO記事制作の費用相場」')],
     ['告知ページ（LP）制作','5万〜100万円程度。平均55.4万円・中央値40万円とする調査もあります。<br>出典：'+a('https://www.fwh.co.jp/knowledge/agency-choice/lp-price/','free web「LP制作の費用相場」')+'、'+a('https://web-kanji.com/posts/landing-page-price','Web幹事「LP制作の費用相場」')],
     ['資料作成代行','プレゼン資料は1スライド3,000〜10,000円程度。構成から依頼する場合は企画構成費として3〜8万円程度が目安です。<br>出典：'+a('https://crowdworks.jp/times/know-how/11335/','クラウドソーシングTimes「資料作成の相場」')+'、'+a('https://nulljapan.jp/column/document-creation-marketprice/','「資料作成代行の費用相場」（nulljapan）')],
     ['バナー制作','静止画で1点3,000〜30,000円程度、構成案から依頼すると1点20,000〜50,000円程度。<br>出典：'+a('https://crowdworks.jp/times/know-how/12513/','クラウドソーシングTimes「バナー制作料金の相場」')+'、'+a('https://imitsu.jp/cost/design_office/article/banner-production-company','PRONIアイミツ「バナー制作の料金相場」')],
@@ -810,7 +849,7 @@ const details={
     ['展示会ブースのデザイン','デザイン・パース等はシンプルなもので5万円前後、オリジナルデザインで20〜30万円超になることもあります（本資料では参考情報）。<br>出典：'+a('https://www.freshtown.co.jp/useful_info/average-exhibition-costs/','フレッシュタウン「展示会ブースの費用相場」')]],
     note:'いずれも各社が公開している相場情報を当社で整理した目安（2026年9月時点）で、特定の会社の見積りではありません。依頼内容・品質・納期により大きく変わります。'},
   scope:{kicker:'費用と支援範囲',title:'支援範囲の詳細',sections:[
-    ['月額10万円に含むもの','月1回の定例（約1時間）とチャットでの随時相談。集客・販促の文案づくり、モック作成、資料のテンプレート化と下書き作成、計測と月次の振り返り。作業量は月ごとに優先順位を決めて調整します。'],
+    ['月額10万円に含むもの','月1回の定例（約1時間）とチャットでの随時相談。集客記事 月4本を基本に、FAQ・SNS原稿・問い合わせ導線の整備と計測・改善。担当イベントの販促文づくり、モック作成、資料のテンプレート化と下書き作成。作業量は月ごとに優先順位を決めて調整します。'],
     ['含まないもの','企業研修・個別研修（生成AI講座・Claude Code講座）、個別のシステム開発、デザイナー・施工会社による本制作、広告費・有料ツール・印刷・求人媒体などの実費。必要な場合は、着手前に内容と費用をご相談します。'],
     ['情報の取り扱い','お客様・出展者の個人情報、クライアントの未公開情報は、AIに入れてよい範囲とツールを開始前に取り決め、そのルールに沿って扱います。秘密保持契約の締結にも対応します。'],
     ['期間と継続','3か月を目安に開始し、振り返りのうえで継続を判断いただきます。']],
@@ -891,17 +930,14 @@ function updateTime(){
   set('outYenNote','年間では '+yen(h*w*12)+'円');
   set('outBreak',w>0?fmt(FEE/w)+'<span>時間／月</span>':'―');
 }
-const LEAD_DEFAULTS={visits:'5000',cvr:'2',cvr2:'2.5',attend:'70',price:'1500'};
+const LEAD_DEFAULTS={visits:'1000',cvr:'1',cvr2:'1.5',win:'20',avg:'50'};
 function updateLead(){
-  const v=num('visits'),c1=num('cvr',100)/100,c2=num('cvr2',100)/100,at=num('attend',100)/100,p=num('price');
-  const a1=v*c1,a2=v*c2,v1=a1*at,v2=a2*at,s1=v1*p,s2=v2*p;
-  const r=n=>Math.round(n);
-  set('outApply',yen(a1)+' → '+yen(a2)+'<span>件</span>');
-  set('outApplyD',sign(r(a2)-r(a1))+yen(Math.abs(r(a2)-r(a1)))+'件');
-  set('outVisit',yen(v1)+' → '+yen(v2)+'<span>人</span>');
-  set('outVisitD',sign(r(v2)-r(v1))+yen(Math.abs(r(v2)-r(v1)))+'人');
-  set('outSales',yen(s1)+' → '+yen(s2)+'<span>円</span>');
-  set('outSalesD',sign(s2-s1)+yen(Math.abs(s2-s1))+'円／イベント');
+  const v=num('visits'),c1=num('cvr',100)/100,c2=num('cvr2',100)/100,w=num('win',100)/100,p=num('avg');
+  const q1=v*c1,q2=v*c2,o1=q1*w,o2=q2*w,s1=o1*p,s2=o2*p;
+  const d=(x,y,u)=>sign(y-x)+fmt(Math.abs(y-x))+u;
+  set('outInq',fmt(q1)+' → '+fmt(q2)+'<span>件／月</span>');set('outInqD',d(q1,q2,'件'));
+  set('outWin',fmt(o1)+' → '+fmt(o2)+'<span>件／月</span>');set('outWinD',d(o1,o2,'件'));
+  set('outSales',fmt(s1)+' → '+fmt(s2)+'<span>万円／月</span>');set('outSalesD',d(s1,s2,'万円／月（年間 '+sign(s2-s1)+fmt(Math.abs(s2-s1)*12)+'万円）'));
 }
 Object.keys(TIME_DEFAULTS).forEach(k=>document.getElementById(k).addEventListener('input',updateTime));
 Object.keys(LEAD_DEFAULTS).forEach(k=>document.getElementById(k).addEventListener('input',updateLead));
