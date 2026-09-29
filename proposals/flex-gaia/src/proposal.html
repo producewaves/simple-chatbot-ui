@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#11303d">
+<meta name="robots" content="noindex, nofollow">
+<title>FLEX gaia様 ご提案資料</title>
+<style>
+/*@@FONTS@@*/
+:root{
+  --navy:#11303d;--navy-2:#1b4351;--teal:#0a8580;--teal-soft:#e2f3f0;--mint:#bfeee2;
+  --paper:#f8faf9;--card:#ffffff;--ink:#15262e;--mute:#546a73;--line:#d6e2e1;
+  --amber:#9a5a12;--amber-soft:#fbefdc;--shade:#eef4f3;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:#d9e1e2;-webkit-font-smoothing:antialiased;font-feature-settings:"palt" 1}
+button,input{font:inherit;color:inherit}
+p,h1,h2,h3,ul,ol{margin:0}
+#app{height:100dvh;display:grid;place-items:center;padding:16px;overflow:hidden}
+.deck{width:min(100%,calc((100dvh - 32px)*16/9));aspect-ratio:16/9;background:var(--paper);position:relative;overflow:hidden;border-radius:14px;box-shadow:0 24px 70px #0e2a3540;container-type:inline-size}
+
+/* ---- type scale (desktop: relative to deck width) ---- */
+.slide{--fs-h:3.05cqw;--fs-sub:1.36cqw;--fs-body:1.3cqw;--fs-small:1.06cqw;--fs-tiny:.94cqw;--fs-title:1.7cqw;--fs-big:3.6cqw;--gap:1.6cqw;
+  position:absolute;inset:0;padding:3.2cqw 4.6cqw 2.4cqw;display:none;flex-direction:column;font-size:var(--fs-body);line-height:1.65}
+.slide.active{display:flex;animation:enter .45s ease both}
+@keyframes enter{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:var(--fs-tiny);color:var(--mute);letter-spacing:.04em}
+.top .brand{font-weight:700;color:var(--navy)}
+.top .section{display:flex;gap:.6em;align-items:center}
+.top .section i{font-style:normal;width:.55em;height:.55em;border-radius:50%;background:var(--teal);display:inline-block}
+.kicker{margin-top:2.2cqw;font-size:var(--fs-small);font-weight:700;color:var(--teal);letter-spacing:.1em}
+.heading,.card h3,.cover h1,.course h3,.closing strong{word-break:auto-phrase}
+.heading{font-size:var(--fs-h);line-height:1.38;letter-spacing:-.02em;font-weight:700;margin:.5cqw 0 .7cqw;text-wrap:balance}
+.sub{font-size:var(--fs-sub);color:var(--mute);line-height:1.6}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:var(--gap);padding:1.8cqw 0 1.4cqw}
+.note{font-size:var(--fs-tiny);color:var(--mute);line-height:1.6}
+.note b{color:var(--ink)}
+.draft{display:inline-block;font-size:.78em;font-weight:700;color:var(--amber);background:var(--amber-soft);border:1px solid #e8cba0;border-radius:4px;padding:0 .45em;margin:0 .2em;line-height:1.55;vertical-align:.08em;white-space:nowrap}
+.em{color:var(--teal);font-weight:700}
+.footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:1cqw;font-size:var(--fs-tiny);color:var(--mute)}
+.nav{display:flex;gap:.6cqw;align-items:center}
+.nav button{white-space:nowrap;border:1px solid currentColor;background:transparent;border-radius:6px;cursor:pointer;padding:.25em .8em;line-height:1.5}
+.nav button:hover,.nav button:focus-visible{background:var(--teal-soft);color:var(--navy);outline:none}
+.num{font-variant-numeric:tabular-nums;min-width:4.2em;text-align:center}
+.more{white-space:nowrap;flex-shrink:0;align-self:flex-start;border:0;background:var(--navy);color:#fff;border-radius:7px;padding:.55em 1.1em;font-size:var(--fs-small);font-weight:700;cursor:pointer;transition:background .2s,transform .2s}
+.more:hover,.more:focus-visible{background:var(--teal);transform:translateY(-2px);outline:2px solid var(--mint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.6cqw 1.8cqw}
+.card h3{font-size:var(--fs-title);line-height:1.45;margin-bottom:.6cqw}
+.label{font-size:var(--fs-tiny);font-weight:700;color:var(--teal);letter-spacing:.08em}
+
+/* dark slides */
+.dark{background:var(--navy);color:#fff}
+.dark .top,.dark .top .brand{color:#c4e4e0}
+.dark .kicker{color:#79d8cb}
+.dark .sub{color:#cfe0e2}
+.dark .footer{border-color:#3f6570;color:#c4d7d9}
+.dark .nav button:hover,.dark .nav button:focus-visible{background:#2d5763;color:#fff}
+
+/* cover */
+.cover-body{flex:1;display:flex;flex-direction:column;justify-content:center}
+.cover h1{font-size:4.1cqw;line-height:1.42;letter-spacing:-.02em;margin:1cqw 0 1.6cqw}
+.cover .lead{font-size:1.55cqw;line-height:1.8;color:#d7e8ea;max-width:56cqw}
+.cover .lead strong{color:#fff}
+.cover-tags{display:flex;gap:.8cqw;flex-wrap:wrap;margin-top:2.4cqw}
+.cover-tags span{border:1px solid #4e7a84;border-radius:99px;padding:.2em .9em;font-size:var(--fs-small);color:#d7e8ea}
+.cover-meta{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.4cqw}
+.cover-meta .to{font-size:2.1cqw;font-weight:700}
+.cover-meta .from{text-align:right;font-size:var(--fs-small);color:#c4d7d9;line-height:1.7}
+.cover .nav [data-prev]{visibility:hidden}
+
+/* 3 points */
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4cqw}
+.point{display:flex;flex-direction:column;gap:.7cqw}
+.point .no{font-size:var(--fs-tiny);font-weight:700;color:#fff;background:var(--teal);border-radius:99px;padding:.1em .8em;align-self:flex-start}
+.point:nth-child(2) .no{background:var(--navy)}
+.point:nth-child(3) .no{background:var(--amber)}
+.point p{font-size:var(--fs-small);color:var(--ink)}
+.band{display:flex;align-items:center;gap:1.6cqw;background:var(--navy);color:#fff;border-radius:12px;padding:1.2cqw 1.8cqw}
+.band .strike{font-size:var(--fs-small);color:#c4d7d9}
+.band .strike s{color:#fff;text-decoration-thickness:2px}
+.band .zero{font-size:2.5cqw;font-weight:700;color:var(--mint);line-height:1.2}
+.band .zero small{font-size:.45em;margin-left:.2em}
+.band .cond{margin-left:auto;font-size:var(--fs-small);color:#d7e8ea;text-align:right;line-height:1.55}
+.band .draft{background:#fbefdc}
+
+/* exchange */
+.exchange{display:grid;grid-template-columns:1fr auto 1fr;gap:1.6cqw;align-items:stretch}
+.exchange .card ul{padding-left:1.1em;font-size:var(--fs-small);line-height:1.75}
+.exchange .card li+li{margin-top:.3cqw}
+.exchange .arrow{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.4cqw;color:var(--teal);font-weight:700;font-size:var(--fs-tiny);text-align:center}
+.exchange .arrow b{font-size:2.6cqw;line-height:1}
+.value{font-size:var(--fs-big);font-weight:700;color:var(--navy);line-height:1.2;margin:.2cqw 0 .6cqw}
+.value small{font-size:.4em;margin-left:.25em;color:var(--mute)}
+.callout{border-left:4px solid var(--teal);background:var(--teal-soft);padding:1cqw 1.4cqw;border-radius:0 8px 8px 0;font-size:var(--fs-small)}
+
+/* map */
+.map{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;gap:1.1cqw}
+.stage{text-align:left;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:1.4cqw 1.4cqw 1.2cqw;cursor:pointer;display:flex;flex-direction:column;gap:.5cqw;transition:transform .2s,border-color .2s}
+.stage:hover,.stage:focus-visible{transform:translateY(-3px);border-color:var(--teal);outline:none}
+.stage .when{font-size:var(--fs-tiny);color:var(--mute)}
+.stage strong{font-size:2cqw;line-height:1.3}
+.stage span{font-size:var(--fs-small);line-height:1.6}
+.stage em{font-style:normal;margin-top:auto;font-size:var(--fs-tiny);font-weight:700;color:var(--teal)}
+.stage.main{background:var(--navy);color:#fff;border-color:var(--navy)}
+.stage.main .when{color:#9fe3d8}.stage.main em{color:var(--mint)}
+.stage.learn{background:var(--shade);border-style:dashed}
+.legend{display:grid;grid-template-columns:3.2fr 1fr;gap:1.1cqw;font-size:var(--fs-tiny);line-height:1.55}
+.legend div{border-top:3px solid var(--teal);padding-top:.6cqw}
+.legend div+div{border-top:3px dashed #9ab1b4}
+.legend b{display:block;font-size:var(--fs-small)}
+
+/* rows (channel table) */
+.rows{display:grid;grid-template-columns:14cqw 1fr;border-top:1px solid var(--line)}
+.rows>*{border-bottom:1px solid var(--line);padding:.95cqw .6cqw}
+.rows dt{font-weight:700;font-size:var(--fs-small);line-height:1.45}
+.rows dt small{display:block;font-weight:400;color:var(--mute);font-size:var(--fs-tiny)}
+.rows dd{margin:0;font-size:var(--fs-small)}
+.rows dd b{color:var(--teal)}
+.split{display:flex;justify-content:space-between;align-items:center;gap:2cqw}
+
+/* cycle */
+.cycle{display:grid;grid-template-columns:repeat(5,1fr);gap:.9cqw;padding:0}
+.cycle li{list-style:none;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.2cqw;position:relative;display:flex;flex-direction:column;gap:.35cqw}
+.cycle li:not(:last-child)::after{content:"";position:absolute;right:-.9cqw;top:50%;width:.9cqw;height:2px;background:var(--teal)}
+.cycle .n{font-size:var(--fs-tiny);font-weight:700;color:var(--teal)}
+.cycle strong{font-size:1.45cqw;line-height:1.4}
+.cycle .q{font-size:1.9cqw;font-weight:700;color:var(--navy);line-height:1.25}
+.cycle .q small{font-size:.5em;margin-left:.15em}
+.cycle p{font-size:var(--fs-tiny);line-height:1.6;color:var(--mute)}
+.cycle li.hl{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cycle li.hl .q,.cycle li.hl .n{color:var(--mint)}.cycle li.hl p{color:#cfe0e2}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:1.1cqw}
+.roles>div{border-radius:10px;padding:1cqw 1.4cqw;font-size:var(--fs-small);background:var(--shade)}
+.roles b{display:block;color:var(--teal);font-size:var(--fs-tiny);letter-spacing:.06em}
+
+/* two-col */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw;align-items:stretch}
+.channels{display:flex;flex-direction:column;gap:.6cqw}
+.channels div{display:flex;align-items:center;gap:1cqw;background:var(--shade);border-radius:8px;padding:.7cqw 1cqw;font-size:var(--fs-small)}
+.channels div b{min-width:10.5cqw}
+.channels .goal{background:var(--navy);color:#fff;justify-content:center;font-weight:700}
+.checks{list-style:none;padding:0;display:flex;flex-direction:column;gap:.75cqw}
+.checks li{padding-left:1.7cqw;position:relative;font-size:var(--fs-small)}
+.checks li::before{content:"";position:absolute;left:.2cqw;top:.45em;width:.75cqw;height:.42cqw;border-left:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(-45deg)}
+.checks li b{display:block;font-size:var(--fs-body)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1cqw}
+.steps .card{display:flex;flex-direction:column;gap:.5cqw}
+.steps .card p{font-size:var(--fs-small)}
+.steps .card ul{padding-left:1.1em;font-size:var(--fs-small);line-height:1.7}
+.steps .card.later{background:var(--shade);border-style:dashed}
+.tags{display:flex;flex-wrap:wrap;gap:.45cqw}
+.tags span{background:var(--teal-soft);color:#0a615d;border-radius:99px;padding:.05em .75em;font-size:var(--fs-tiny);font-weight:700}
+
+/* courses */
+.courses{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw}
+.course{border-top:3px solid var(--teal);padding-top:1cqw;display:flex;flex-direction:column;gap:.5cqw}
+.course h3{font-size:1.9cqw;line-height:1.35}
+.course .lead{color:var(--teal);font-weight:700;font-size:var(--fs-small)}
+.course ul{padding-left:1.1em;font-size:var(--fs-small);line-height:1.75}
+.course .goal{font-size:var(--fs-small);background:var(--shade);border-radius:8px;padding:.7cqw 1cqw}
+.course .goal b{color:var(--teal)}
+
+/* plan */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1cqw}
+.metric{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.1cqw 1.3cqw}
+.metric small{display:block;font-size:var(--fs-tiny);color:var(--mute);font-weight:700}
+.metric strong{display:block;font-size:var(--fs-big);line-height:1.2;color:var(--navy)}
+.metric strong span{font-size:.42em;margin-left:.2em}
+.metric p{font-size:var(--fs-tiny);color:var(--mute);line-height:1.5}
+.metric.zero{background:var(--navy);border-color:var(--navy)}
+.metric.zero small,.metric.zero p{color:#cfe0e2}.metric.zero strong{color:var(--mint)}
+.months{display:grid;grid-template-columns:repeat(3,1fr);gap:1cqw}
+.months div{border-top:3px solid var(--teal);padding-top:.6cqw;font-size:var(--fs-small);line-height:1.6}
+.months b{display:block;font-size:var(--fs-body)}
+
+/* bars */
+.bars{display:flex;flex-direction:column;gap:1.3cqw}
+.bar-row{display:grid;grid-template-columns:17cqw 1fr;gap:1.2cqw;align-items:center}
+.bar-row .what{font-size:var(--fs-small);line-height:1.45}
+.bar-row .what b{display:block;font-size:var(--fs-body)}
+.bar-track{position:relative;height:3.2cqw}
+.bar{height:100%;border-radius:0 6px 6px 0;background:#9ab1b4;display:flex;align-items:center;justify-content:flex-end;padding-right:1cqw;color:#fff;font-weight:700;font-size:1.5cqw;min-width:6cqw}
+.bar.after{background:var(--teal)}
+.bar-row .calc{grid-column:2;font-size:var(--fs-tiny);color:var(--mute);margin-top:-.8cqw}
+.diff{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2cqw 1cqw;font-size:var(--fs-small)}
+.diff strong{white-space:nowrap;font-size:2.3cqw;color:var(--teal)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1.15fr;gap:1.8cqw;align-items:stretch}
+.inputs{display:flex;flex-direction:column;gap:.8cqw}
+.inputs label{display:grid;grid-template-columns:1fr 9cqw 3.2cqw;align-items:center;gap:.6cqw;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.7cqw 1cqw;font-size:var(--fs-small);font-weight:700}
+.inputs label small{display:block;font-weight:400;color:var(--mute);font-size:var(--fs-tiny)}
+.inputs input{width:100%;border:1px solid #b7c9ca;border-radius:6px;padding:.35em .5em;text-align:right;font-size:var(--fs-body);font-variant-numeric:tabular-nums;background:#fff}
+.inputs input:focus{outline:2px solid var(--teal);border-color:var(--teal)}
+.inputs .unit{font-size:var(--fs-small);font-weight:400;color:var(--mute)}
+.inputs .reset{align-self:flex-start;border:1px solid var(--line);background:transparent;border-radius:6px;padding:.25em .9em;font-size:var(--fs-tiny);cursor:pointer;color:var(--mute)}
+.results{display:flex;flex-direction:column;gap:.8cqw}
+.result{border-radius:12px;padding:1.1cqw 1.4cqw;background:var(--navy);color:#fff}
+.result small{font-size:var(--fs-tiny);color:#cfe0e2;font-weight:700}
+.result strong{display:block;font-size:var(--fs-big);line-height:1.25;color:var(--mint);font-variant-numeric:tabular-nums}
+.result strong span{font-size:.42em;margin-left:.2em;color:#fff}
+.result p{font-size:var(--fs-tiny);color:#cfe0e2}
+.result.sub-r{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.result.sub-r small,.result.sub-r p{color:var(--mute)}
+.result.sub-r strong{color:var(--navy)}.result.sub-r strong span{color:var(--mute)}
+.stamp{display:inline-block;font-size:var(--fs-tiny);font-weight:700;color:var(--amber);border:1px solid #e0bd8c;background:var(--amber-soft);border-radius:4px;padding:0 .5em;margin-left:.4em}
+
+/* terms */
+.terms{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw}
+.terms h3{font-size:var(--fs-title);margin-bottom:.7cqw}
+.terms ol{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:.7cqw;counter-reset:t}
+.terms ol li{counter-increment:t;position:relative;padding-left:2.4cqw;font-size:var(--fs-small);line-height:1.6}
+.terms ol li::before{content:counter(t);position:absolute;left:0;top:.15em;width:1.6cqw;height:1.6cqw;border-radius:50%;background:var(--amber);color:#fff;font-size:var(--fs-tiny);font-weight:700;display:grid;place-items:center;line-height:1}
+.terms ol li b{display:block;font-size:var(--fs-body)}
+.terms .promise ol li::before{background:var(--teal);content:"✓"}
+
+/* decisions */
+.decide{display:grid;grid-template-columns:1fr 1fr;gap:.8cqw 1.6cqw;counter-reset:d}
+.decide div{counter-increment:d;display:grid;grid-template-columns:2.6cqw 1fr;gap:.9cqw;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.9cqw 1.2cqw}
+.decide div::before{content:counter(d);width:2.4cqw;height:2.4cqw;border-radius:50%;background:var(--teal-soft);color:var(--teal);font-weight:700;display:grid;place-items:center;font-size:var(--fs-body)}
+.decide b{display:block;font-size:var(--fs-body);line-height:1.45}
+.decide span{font-size:var(--fs-tiny);color:var(--mute);line-height:1.55}
+.closing{display:flex;justify-content:space-between;align-items:center;gap:2cqw;background:var(--navy);color:#fff;border-radius:12px;padding:1.1cqw 1.8cqw;font-size:var(--fs-small)}
+.closing strong{font-size:var(--fs-title)}
+
+/* drawer & overview panel */
+.scrim{position:absolute;inset:0;background:#0a1e28b3;display:none;z-index:5}
+.scrim.open{display:block}
+.drawer{position:absolute;z-index:6;top:0;right:0;bottom:0;width:min(46%,660px);background:#fff;box-shadow:-18px 0 40px #0a1e2840;padding:2.4cqw 2.6cqw;transform:translateX(105%);transition:transform .3s ease;overflow-y:auto;visibility:hidden}
+.drawer.open{transform:none;visibility:visible}
+.drawer .close,.panel .close{float:right;border:0;background:var(--shade);border-radius:8px;width:38px;height:38px;font-size:20px;cursor:pointer}
+.drawer .d-kicker{font-size:13px;font-weight:700;color:var(--teal);letter-spacing:.08em}
+.drawer h2{font-size:clamp(19px,1.9cqw,28px);line-height:1.4;margin:.6em 0 .8em;clear:both}
+.drawer h3{font-size:clamp(14px,1.25cqw,18px);color:var(--teal);margin:1.1em 0 .3em}
+.drawer p,.drawer li{font-size:clamp(13px,1.12cqw,16px);line-height:1.75}
+.drawer ul{padding-left:1.2em}
+.drawer .d-note{margin-top:1.4em;border-top:1px solid var(--line);padding-top:.9em;font-size:clamp(12px,.98cqw,14px);color:var(--mute)}
+.panel{display:none;position:absolute;inset:6% 7%;z-index:7;background:#fff;border-radius:14px;box-shadow:0 12px 50px #0a1e2899;padding:2.2cqw 2.6cqw;overflow-y:auto}
+.panel.open{display:block}
+.panel h2{font-size:clamp(18px,2cqw,28px);margin-bottom:.8em}
+.panel .grp{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2cqw}
+.panel .grp h3{font-size:clamp(12px,1cqw,14px);color:var(--teal);letter-spacing:.06em;margin-bottom:.5em}
+.panel .grp button{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--shade);border-radius:8px;padding:.6em .8em;margin-bottom:.5em;cursor:pointer;font-size:clamp(12px,1.05cqw,15px);line-height:1.45}
+.panel .grp button:hover,.panel .grp button:focus-visible{border-color:var(--teal);outline:none}
+.panel .grp button[aria-current="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.panel .grp button i{font-style:normal;color:var(--mute);margin-right:.5em;font-variant-numeric:tabular-nums}
+.panel .grp button[aria-current="true"] i{color:var(--mint)}
+.panel .keys{margin-top:1em;color:var(--mute);font-size:13px}
+
+/* ---- phone ---- */
+@media (max-width:800px){
+  #app{display:block;padding:0;height:auto;overflow:visible}
+  .deck{width:100%;aspect-ratio:auto;min-height:100dvh;border-radius:0;box-shadow:none;overflow:visible}
+  .slide{--fs-h:24px;--fs-sub:14px;--fs-body:15px;--fs-small:14px;--fs-tiny:12px;--fs-title:17px;--fs-big:30px;--gap:16px;
+    position:relative;min-height:100dvh;padding:18px 16px 14px}
+  .top .section{display:none}
+  .kicker{margin-top:22px}
+  .heading{margin:6px 0 8px}
+  .body{justify-content:flex-start;padding:18px 0 20px}
+  .card{padding:16px}
+  .footer{position:sticky;bottom:0;z-index:2;background:var(--paper);padding:10px 16px 12px;margin:0 -16px -14px;box-shadow:0 -6px 14px #11303d14}
+  .dark .footer{background:var(--navy)}
+  .footer>span:first-child{display:none}.nav{width:100%;justify-content:space-between;gap:6px}.nav button{padding:8px 14px}
+  .cover h1{font-size:28px;margin:10px 0 16px}.cover .lead{font-size:15px;max-width:none}
+  .cover-tags{margin-top:20px;gap:8px}.cover-meta{flex-direction:column;align-items:flex-start;gap:14px;margin:28px 0 14px}.cover-meta .to{font-size:20px}.cover-meta .from{text-align:left}
+  .points,.exchange,.map,.legend,.two,.steps,.courses,.metrics,.months,.calc,.terms,.decide,.roles{grid-template-columns:1fr}
+  .points{gap:12px}.point{gap:8px}
+  .band{flex-wrap:wrap;gap:6px 14px;padding:14px 16px}.band .zero{font-size:26px}.band .cond{margin-left:0;text-align:left}
+  .exchange .arrow{flex-direction:row;gap:8px}.exchange .arrow b{font-size:24px;transform:rotate(90deg)}
+  .map{gap:10px}.stage{padding:14px;gap:4px}.stage strong{font-size:20px}
+  .legend{gap:12px}
+  .rows{grid-template-columns:1fr}.rows dt{border-bottom:0;padding:12px 0 2px}.rows dd{padding:0 0 12px}
+  .split{flex-direction:column;align-items:flex-start;gap:12px}
+  .cycle{grid-template-columns:1fr;gap:10px}.cycle li{padding:12px 14px;gap:2px}.cycle li:not(:last-child)::after{display:none}.cycle strong{font-size:16px}.cycle .q{font-size:22px}
+  .channels div{padding:10px 12px;gap:10px}.channels div b{min-width:92px}
+  .checks{gap:10px}.checks li{padding-left:22px}.checks li::before{width:9px;height:5px;left:2px}
+  .course h3{font-size:20px}.course{padding-top:12px;gap:6px}.course .goal{padding:10px 12px}
+  .metrics{grid-template-columns:1fr 1fr;gap:10px}.metric{padding:12px}
+  .months{gap:12px}.months div{padding-top:8px}
+  .bar-row{grid-template-columns:1fr;gap:6px}.bar-track{height:34px}.bar{font-size:16px;padding-right:10px;min-width:64px}.bar-row .calc{grid-column:1;margin-top:0}.diff strong{font-size:24px}
+  .inputs{gap:10px}.inputs label{grid-template-columns:1fr 104px 36px;gap:8px;padding:10px 12px}
+  .results{gap:10px}.result{padding:12px 14px}
+  .terms{gap:20px}.terms h3{margin-bottom:10px}.terms ol{gap:10px}.terms ol li{padding-left:30px}.terms ol li::before{width:20px;height:20px}
+  .decide{gap:10px}.decide div{grid-template-columns:30px 1fr;gap:10px;padding:10px 12px}.decide div::before{width:28px;height:28px}
+  .closing{flex-direction:column;align-items:flex-start;gap:6px;padding:14px 16px}
+  .more{padding:10px 16px}
+  .drawer{position:fixed;width:100%;padding:18px 18px 28px}
+  .panel{position:fixed;inset:0;border-radius:0;padding:18px}
+  .panel .grp{grid-template-columns:1fr 1fr;gap:12px}
+  .draft{font-size:.72em}
+}
+@media (max-width:420px){.panel .grp{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media print{
+  @page{size:A4 landscape;margin:0}
+  html,body,#app{height:auto;background:#fff;padding:0;overflow:visible;display:block}
+  .deck{width:297mm;aspect-ratio:auto;box-shadow:none;border-radius:0;overflow:visible}
+  .slide{position:relative;display:flex!important;width:297mm;height:167mm;break-after:page;animation:none!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .nav,.more,.scrim,.drawer,.panel,.inputs .reset{display:none!important}
+}
+</style>
+</head>
+<body>
+<main id="app">
+<div class="deck" aria-label="FLEX gaia様向け ご提案資料" aria-roledescription="スライド">
+
+<!-- 0 表紙 -->
+<section class="slide dark cover active" data-title="表紙" data-group="はじめに">
+  <div class="cover-body">
+    <p class="kicker">AI顧問のご提案　―　導入事例へのご協力をお願いする特別条件</p>
+    <h1>AI顧問として、<br>事業の立ち上げに伴走させてください。</h1>
+    <p class="lead">集客・採用・業務効率化をAIの活用で支える<strong>AI顧問（通常月額10万円）</strong>を、取り組みを当社の導入事例として紹介させていただくことを条件に、<strong>無償</strong>でご提供します。</p>
+    <div class="cover-tags"><span>集客</span><span>採用</span><span>業務効率化</span><span>企業研修</span><span>個別研修</span></div>
+  </div>
+  <div class="cover-meta">
+    <div class="to">FLEX gaia 様</div>
+    <div class="from">ご提案：株式会社プロデュースウェイブズ<br>2026年9月</div>
+  </div>
+</section>
+
+<!-- 1 要点 -->
+<section class="slide" data-title="ご提案の要点" data-group="はじめに">
+  <p class="kicker">ご提案の要点</p>
+  <h1 class="heading">AI顧問の費用0円で、集客の土台づくりから始められます。</h1>
+  <p class="sub">「何を支援するのか」「御社のメリット」「ご協力いただくこと」を3点にまとめました。</p>
+  <div class="body">
+    <div class="points">
+      <article class="card point"><span class="no">当社が支援すること</span><h3>AI顧問として、幅広く伴走</h3><p>まずは集客から。月1回の打合せをもとに記事を月4本制作し、FAQ・SNS原稿・問い合わせ導線を整備。採用や業務の相談も同じ窓口で受けます。</p></article>
+      <article class="card point"><span class="no">御社のメリット</span><h3>月額10万円のAI顧問が0円</h3><p>記事の執筆・公開は当社が担当し、御社は打合せと内容確認が中心。記事やFAQは御社サイトに公開され、住宅相談の入口として積み上がります。</p></article>
+      <article class="card point"><span class="no">ご協力いただくこと</span><h3>取り組みを、導入事例として紹介</h3><p>当社ホームページとYouTubeで、社名と取り組み内容を紹介させてください。原稿・動画は公開前にご確認いただきます。</p></article>
+    </div>
+    <div class="band">
+      <div class="strike">AI顧問の通常費用<br><s>月額10万円</s></div>
+      <div class="zero">0<small>円</small></div>
+      <div class="cond">事例協力の条件を満たす場合、<br>合意した無償期間の顧問費用<span class="draft">期間はご相談</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 なぜ無償か -->
+<section class="slide" data-title="無償でご提供する理由" data-group="はじめに">
+  <p class="kicker">無償でご提供する理由</p>
+  <h1 class="heading">無償にするのは、実際の取り組みを事例として伝えたいからです。</h1>
+  <p class="sub">値引きではなく、「AI顧問としての支援」と「事例公開へのご協力」を交換するご提案です。</p>
+  <div class="body">
+    <div class="exchange">
+      <div class="card">
+        <p class="label">FLEX gaia様が得るもの</p>
+        <p class="value">月額10万円<small>相当のAI顧問</small></p>
+        <ul>
+          <li>立ち上げ期に費用をかけず、集客の基盤づくりに着手できる</li>
+          <li>記事制作を任せ、御社は本業と住宅相談への対応に集中できる</li>
+          <li>採用・業務管理の相談も、同じ窓口でできる</li>
+        </ul>
+      </div>
+      <div class="arrow"><b>⇄</b>交換</div>
+      <div class="card">
+        <p class="label">当社が得るもの</p>
+        <p class="value">導入事例<small>ホームページ・YouTube</small></p>
+        <ul>
+          <li>住宅領域でAIを活用した実際の支援の様子を、具体的に紹介できる</li>
+          <li>これからご相談いただく企業に、支援の中身と進め方を伝えられる</li>
+          <li>現場の声を、当社のサービス改善に活かせる</li>
+        </ul>
+      </div>
+    </div>
+    <p class="callout">そのため「事例として紹介できること」が条件です。掲載内容は公開前にご確認いただき、写真・数値・お客様情報などの掲載範囲は個別に合意します。</p>
+  </div>
+</section>
+
+<!-- 3 全体像 -->
+<section class="slide" data-title="AI顧問の支援範囲" data-group="支援内容">
+  <p class="kicker">AI顧問の支援範囲</p>
+  <h1 class="heading">AI顧問として、集客・採用・業務効率化に幅広く入ります。</h1>
+  <p class="sub">まずは集客から。事業の成長に合わせて支援を広げ、研修で御社自身がAIを使える状態をつくります。最初から大きなシステムはつくりません。</p>
+  <div class="body">
+    <div class="map" role="group" aria-label="4つの支援">
+      <button class="stage main" data-go="4"><span class="when">いま最優先</span><strong>集客</strong><span>自社サイト・検索・AI検索・SNSから、住宅相談につなげる</span><em>詳しく ›</em></button>
+      <button class="stage" data-go="6"><span class="when">人が必要になったら</span><strong>採用</strong><span>採用ページ・求人媒体・SNSで応募の入口を整える</span><em>詳しく ›</em></button>
+      <button class="stage" data-go="7"><span class="when">案件が増えてきたら</span><strong>業務効率化</strong><span>顧客・案件・原価・契約・着金の管理をExcelから整理</span><em>詳しく ›</em></button>
+      <button class="stage learn" data-go="8"><span class="when">社内にAIを根づかせる</span><strong>企業研修・個別研修</strong><span>生成AI講座・Claude Code講座で、自社で改善できる状態へ</span><em>詳しく ›</em></button>
+    </div>
+    <div class="legend">
+      <div><b>AI顧問（月額10万円・今回の無償提供の対象）</b>集客・採用・業務効率化を、月1回の打合せで優先順位を決めながら当社が実務で支援します。</div>
+      <div><b>研修</b>実施内容・費用は別途ご相談します。</div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 集客：見つかる -->
+<section class="slide" data-title="集客｜見つけてもらう" data-group="支援内容">
+  <p class="kicker">支援1　集客</p>
+  <h1 class="heading">住宅を検討している人に、御社の情報が見つかる状態をつくります。</h1>
+  <p class="sub">SEO・AIO・LLMOは、専門用語よりも「お客様の行動がどう変わるか」でご説明します。</p>
+  <div class="body">
+    <dl class="rows">
+      <dt>検索<small>SEO</small></dt><dd>「RC造 賃貸併用住宅 費用」などで調べた人が、<b>御社の解説記事にたどり着く</b>よう、記事とページ構成を整えます。</dd>
+      <dt>AI検索<small>AIO／LLMO</small></dt><dd>ChatGPTやGoogleのAIによる回答で調べた人に、<b>御社の説明が参考情報として届きやすい</b>よう、質問と答えの形（FAQ）で情報を整理します。</dd>
+      <dt>SNS</dt><dd>投稿を見て興味を持った人が、<b>詳しい記事や相談ページへ進める</b>ように発信します。</dd>
+      <dt>問い合わせ導線</dt><dd>記事を読み終えた人が、<b>迷わず住宅相談を申し込める</b>よう、案内文やフォームを整えます。</dd>
+    </dl>
+    <div class="split">
+      <p class="note">検索順位やAIの回答への掲載を保証するものではありません。アクセスと問い合わせを計測し、反応を見て改善します。</p>
+      <button class="more" data-detail="themes">記事テーマの例を見る ›</button>
+    </div>
+  </div>
+</section>
+
+<!-- 5 集客：毎月の流れ -->
+<section class="slide" data-title="集客｜毎月の制作と改善" data-group="支援内容">
+  <p class="kicker">支援1　集客</p>
+  <h1 class="heading">月1回の打合せから、記事4本と改善までを毎月回します。</h1>
+  <p class="sub">御社から伺った内容を、当社が記事・FAQ・SNS原稿に仕立てて公開し、数字を見て改善します。</p>
+  <div class="body">
+    <ol class="cycle">
+      <li class="hl"><span class="n">1</span><strong>打合せ</strong><span class="q">月1<small>回</small></span><p>よく受ける質問や工法の特徴を伺い、テーマを決定</p></li>
+      <li><span class="n">2</span><strong>記事制作</strong><span class="q">月4<small>本</small></span><p>構成・執筆・修正・公開を当社が担当</p></li>
+      <li><span class="n">3</span><strong>FAQ・SNS</strong><p>記事の内容を、よくある質問とSNS原稿に展開</p></li>
+      <li><span class="n">4</span><strong>問い合わせ導線</strong><p>相談の流れやフォームを分かりやすく整備</p></li>
+      <li><span class="n">5</span><strong>計測・改善</strong><p>アクセスと問い合わせを確認し、翌月のテーマに反映</p></li>
+    </ol>
+    <div class="roles">
+      <div><b>当社が担当</b>記事・FAQ・SNS原稿の制作、公開作業、計測の設定、結果の共有と改善提案</div>
+      <div><b>御社にお願いすること</b>打合せへの参加、原稿の事実確認、写真・図面・資料のご提供</div>
+    </div>
+    <button class="more" data-detail="roles">役割分担の詳細を見る ›</button>
+  </div>
+</section>
+
+<!-- 6 採用 -->
+<section class="slide" data-title="採用｜応募の入口づくり" data-group="支援内容">
+  <p class="kicker">支援2　採用</p>
+  <h1 class="heading">集客だけでなく、採用の入口も整えて活用できます。</h1>
+  <p class="sub">人が必要になる時期に備え、応募につながる情報と経路を準備します。</p>
+  <div class="body">
+    <div class="two">
+      <div class="card">
+        <p class="label">整備・活用する採用チャネル</p>
+        <div class="channels" style="margin-top:.8cqw">
+          <div><b>採用ページ</b>自社サイトに、仕事内容と働く魅力を掲載</div>
+          <div><b>求人媒体</b>engage等の媒体に、求人原稿を掲載</div>
+          <div><b>SNS・記事</b>日々の発信から、採用ページへ案内</div>
+          <div class="goal">応募・面談へ</div>
+        </div>
+      </div>
+      <div class="card">
+        <p class="label">当社が担当すること</p>
+        <ul class="checks" style="margin-top:.8cqw">
+          <li><b>仕事内容と会社の魅力の言語化</b>創設メンバーの想いや仕事の特徴を伺い、伝わる言葉に整理</li>
+          <li><b>求人原稿・採用ページの作成</b>媒体ごとに原稿を作成し、掲載まで支援</li>
+          <li><b>応募導線の整備と確認</b>どの経路から応募があったかを確認し、原稿を見直し</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note">人材の紹介や応募数の保証ではなく、御社が自ら採用を進められる経路づくりの支援です。求人媒体の掲載費用が発生する場合は、御社のご負担となります。</p>
+  </div>
+</section>
+
+<!-- 7 業務効率化 -->
+<section class="slide" data-title="業務効率化｜Excelから整える" data-group="支援内容">
+  <p class="kicker">支援3　業務効率化</p>
+  <h1 class="heading">管理はExcelから。必要になった分だけ仕組みにします。</h1>
+  <p class="sub">案件が増えても情報が散らばらないよう、いま使える道具で小さく整えます。</p>
+  <div class="body">
+    <div class="steps">
+      <div class="card"><p class="label">STEP 1　整理する</p><h3>管理する情報を一か所に</h3><div class="tags"><span>顧客</span><span>案件</span><span>原価</span><span>契約</span><span>着金</span></div><p>管理項目を整理し、Excelやスプレッドシートの一覧に。まずは今の業務に合う形から始めます。</p></div>
+      <div class="card"><p class="label">STEP 2　AIで手間を減らす</p><h3>繰り返す作業を短く</h3><ul><li>打合せ記録から議事録を整理</li><li>問い合わせへの返信文を下書き</li><li>一覧への転記や集計を効率化</li></ul></div>
+      <div class="card later"><p class="label">STEP 3　必要になったら</p><h3>個別の仕組みづくり</h3><p>Excelでは足りなくなった業務は、効果と費用を確認したうえで、システムの設計・開発を<b>別途ご相談</b>します。</p></div>
+    </div>
+    <p class="callout">当社は住宅・不動産領域での開発経験があり、業務整理から設計・開発まで対応できます。だからこそ、最初から大規模な開発はおすすめしません。</p>
+    <button class="more" data-detail="ops">効率化の例を見る ›</button>
+  </div>
+</section>
+
+<!-- 8 講座 -->
+<section class="slide" data-title="研修｜企業研修・個別研修" data-group="支援内容">
+  <p class="kicker">支援4　研修（学習・内製化）</p>
+  <h1 class="heading">研修で、御社自身がAIを使いこなし、改善できる状態へ。</h1>
+  <p class="sub">AI顧問は「当社が一緒に進める」支援、研修は「御社が自分でできるようになる」ための支援です。</p>
+  <div class="body">
+    <div class="courses">
+      <article class="course"><h3>企業研修<small class="lead" style="margin-left:.6em">生成AI講座</small></h3><p class="lead">メンバー全員が、AIを日々の仕事に活かす</p><ul><li>目的に合う指示の出し方と、情報の渡し方</li><li>文章作成・要約・情報整理への活用</li><li>出力の確認方法と、社内情報の扱い方</li></ul><p class="goal"><b>目指す状態：</b>自社の定型業務を見つけ、AIを使う手順を組み立てられる</p></article>
+      <article class="course"><h3>個別研修<small class="lead" style="margin-left:.6em">Claude Code講座</small></h3><p class="lead">担当者の業務に合わせ、自動化の仕組みを自分でつくる</p><ul><li>つくりたい処理を言葉で整理して依頼する</li><li>ファイル処理・集計などの制作演習</li><li>動作確認・修正・運用の方法</li></ul><p class="goal"><b>目指す状態：</b>小さな自動化を自分でつくり、試しながら改善できる</p></article>
+    </div>
+    <div class="split">
+      <p class="note"><b>研修の内容・回数・費用は別途ご相談です</b>（今回の無償提供の対象はAI顧問です）。研修を受ければすべての業務が自動化できるわけではなく、効果の出やすい業務から少しずつ取り組みます。</p>
+      <button class="more" data-detail="course">研修後の活用例を見る ›</button>
+    </div>
+  </div>
+</section>
+
+<!-- 9 進め方 -->
+<section class="slide" data-title="進め方｜3か月で実施する場合" data-group="数字と進め方">
+  <p class="kicker">数字と進め方</p>
+  <h1 class="heading">仮に3か月で実施すると、打合せ3回・記事12本です。</h1>
+  <p class="sub">無償で支援する期間は御社と相談して決めます。以下は「3か月」とした場合の計画例です。<span class="draft">案</span></p>
+  <div class="body">
+    <div class="metrics">
+      <div class="metric"><small>打合せ</small><strong>3<span>回</span></strong><p>月1回 × 3か月</p></div>
+      <div class="metric"><small>記事制作</small><strong>12<span>本</span></strong><p>月4本 × 3か月</p></div>
+      <div class="metric"><small>AI顧問の通常費用</small><strong>30<span>万円相当</span></strong><p>月額10万円 × 3か月</p></div>
+      <div class="metric zero"><small>御社のご負担</small><strong>0<span>円</span></strong><p>事例協力の条件を満たす場合</p></div>
+    </div>
+    <div class="months">
+      <div><b>1か月目：準備と公開開始</b>現状の確認、計測の準備、問い合わせ導線の見直し、記事4本</div>
+      <div><b>2か月目：反応を見て改善</b>読まれた記事・問い合わせの経路を確認して改善、記事4本</div>
+      <div><b>3か月目：振り返りと事例化</b>数字の振り返り、記事4本、インタビュー等の事例制作</div>
+    </div>
+    <div class="split">
+      <p class="note">毎月確認する数字：記事の公開本数／サイト訪問数／問い合わせ件数／御社の作業時間。検索からの流入や問い合わせの増加には、時間がかかる場合があります。</p>
+      <button class="more" data-detail="start">開始までの流れを見る ›</button>
+    </div>
+  </div>
+</section>
+
+<!-- 10 作業時間 -->
+<section class="slide" data-title="御社の作業時間（試算）" data-group="数字と進め方">
+  <p class="kicker">数字と進め方</p>
+  <h1 class="heading">記事づくりに使う御社の時間は、月12時間から2時間へ。<span class="stamp">試算</span></h1>
+  <p class="sub">月4本の記事を「自社で制作する場合」と「当社が制作する場合」を、仮定の数字で比べた例です。</p>
+  <div class="body">
+    <div class="bars" role="img" aria-label="自社制作は月12時間、当社支援では月2時間という試算の比較">
+      <div class="bar-row"><div class="what"><b>自社で制作</b>1本3時間 × 4本</div><div class="bar-track"><div class="bar" style="width:100%">12時間／月</div></div></div>
+      <div class="bar-row"><div class="what"><b>当社が制作</b>打合せ1時間 ＋ 確認15分 × 4本</div><div class="bar-track"><div class="bar after" style="width:16.7%">2時間</div></div></div>
+    </div>
+    <div class="diff">差分<strong>月10時間</strong>を、本業や住宅相談への対応に充てられる計算です。</div>
+    <p class="callout"><b>実測値ではなく、仮定に基づく比較例です。</b>写真・資料の準備や追加修正の時間は含んでいません。開始時に現在の実際の作業時間を伺い、支援後の時間と比べて確認します。</p>
+  </div>
+</section>
+
+<!-- 11 試算 -->
+<section class="slide" data-title="問い合わせ数の試算" data-group="数字と進め方">
+  <p class="kicker">数字と進め方</p>
+  <h1 class="heading">問い合わせの目安を、その場で試算できます。</h1>
+  <p class="sub">数字を入れ替えて、「どの数字を伸ばせば相談が増えるか」を一緒に確認するための計算です。</p>
+  <div class="body">
+    <div class="calc">
+      <div class="inputs">
+        <label for="visits"><span>月間サイト訪問数<small>仮の入力例</small></span><input id="visits" type="number" inputmode="numeric" min="0" step="100" value="1000"><span class="unit">件</span></label>
+        <label for="cvr"><span>訪問 → 問い合わせ率<small>仮の入力例</small></span><input id="cvr" type="number" inputmode="decimal" min="0" max="100" step="0.1" value="1"><span class="unit">%</span></label>
+        <label for="win"><span>問い合わせ → 成約率<small>任意。御社の実績があれば入力</small></span><input id="win" type="number" inputmode="decimal" min="0" max="100" step="1" placeholder="未入力"><span class="unit">%</span></label>
+        <button class="reset" type="button" id="resetCalc">入力例に戻す</button>
+      </div>
+      <div class="results" aria-live="polite">
+        <div class="result"><small>月の問い合わせ数（計算値）</small><strong id="outInq">10<span>件／月</span></strong><p>サイト訪問数 × 問い合わせ率</p></div>
+        <div class="result sub-r"><small>月の成約数（計算値）</small><strong id="outWin">―</strong><p id="outWinNote">成約率を入力すると表示します（問い合わせ数 × 成約率）</p></div>
+      </div>
+    </div>
+    <p class="note"><b>入力値はすべて仮の数字で、実績・成果の保証・達成見込みではありません。</b>成約率や住宅の粗利は、御社の実績をもとに検討してください。支援開始後は実際の訪問数・問い合わせ数で見直します。</p>
+  </div>
+</section>
+
+<!-- 12 事例協力の条件 -->
+<section class="slide" data-title="事例協力の条件" data-group="条件と次のステップ">
+  <p class="kicker">事例協力の条件</p>
+  <h1 class="heading">お願いしたいのは、取り組みを事例として紹介することです。</h1>
+  <p class="sub">ご協力いただく内容と、当社がお約束することを整理しました。</p>
+  <div class="body">
+    <div class="terms">
+      <div class="card">
+        <h3>ご協力をお願いすること</h3>
+        <ol>
+          <li><b>社名と取り組み内容の紹介</b>当社ホームページとYouTubeで、導入事例として紹介します。</li>
+          <li><b>インタビューへのご協力</b>ご担当者へのインタビュー（例：1回・30〜60分）<span class="draft">回数・時間は案</span></li>
+          <li><b>成果確認へのご協力</b>アクセスや問い合わせ等の数字を一緒に振り返ります。掲載する数字は別途合意します。</li>
+        </ol>
+      </div>
+      <div class="card promise">
+        <h3>当社がお約束すること</h3>
+        <ol>
+          <li><b>公開前に必ずご確認</b>原稿・動画は、公開前に御社にご確認いただきます。</li>
+          <li><b>掲載範囲は個別に合意</b>写真、成果数値、お客様情報などは、合意した範囲のみ掲載します。</li>
+          <li><b>自動的に有料契約へ移行しません</b>無償期間終了後の継続は、振り返りのうえで別途ご相談します。</li>
+        </ol>
+      </div>
+    </div>
+    <div class="split">
+      <p class="note">無償の対象はAI顧問です。研修、個別のシステム開発、広告費や有料ツール等の実費は含みません。</p>
+      <button class="more" data-detail="scope">支援範囲と掲載の詳細を見る ›</button>
+    </div>
+  </div>
+</section>
+
+<!-- 13 次に決めること -->
+<section class="slide" data-title="次に決めること" data-group="条件と次のステップ">
+  <p class="kicker">次に決めること</p>
+  <h1 class="heading">開始に向けて、この6点を一緒に決めさせてください。</h1>
+  <p class="sub">合意した内容は書面にまとめ、双方で確認してから支援を始めます。</p>
+  <div class="body">
+    <div class="decide">
+      <div><p><b>無償で支援する期間と開始時期</b><span>例：3か月。開始は資料・アカウント権限のご準備に合わせて</span></p></div>
+      <div><p><b>最初に取り組む集客テーマ</b><span>よく受ける質問、伝えたい工法の特徴、優先する地域など</span></p></div>
+      <div><p><b>事例として掲載する範囲</b><span>社名、写真、数値、動画への出演の有無</span></p></div>
+      <div><p><b>インタビュー・成果確認の方法</b><span>回数、時間、時期、撮影方法</span></p></div>
+      <div><p><b>採用・業務効率化・研修に着手する時期</b><span>集客を優先し、必要になる時期を目安に</span></p></div>
+      <div><p><b>制作物の扱いと、終了後の進め方</b><span>記事等の権利・掲載期間、継続する場合の条件</span></p></div>
+    </div>
+    <div class="closing"><strong>まずは、御社の状況を伺うところから。</strong><span>ご不明な点・ご要望は、この場でお気軽にお知らせください。</span></div>
+  </div>
+</section>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="detailTitle" aria-hidden="true">
+  <button class="close" id="closeDetail" aria-label="詳細を閉じる">×</button>
+  <div id="detail"></div>
+</aside>
+<div class="panel" id="panel" role="dialog" aria-modal="true" aria-label="ページ一覧" aria-hidden="true">
+  <button class="close" id="closePanel" aria-label="一覧を閉じる">×</button>
+  <h2>ページ一覧</h2>
+  <div class="grp" id="panelGroups"></div>
+  <p class="keys">← → でページ移動　／　O で一覧　／　Esc で閉じる</p>
+</div>
+</div>
+</main>
+<script>
+const BRAND='株式会社プロデュースウェイブズ';
+const slides=[...document.querySelectorAll('.slide')];
+const total=slides.length;
+let page=0,lastFocus=null;
+
+/* 共通のヘッダー・フッターを付与 */
+slides.forEach((s,i)=>{
+  const top=document.createElement('div');top.className='top';
+  top.innerHTML='<span class="brand">'+BRAND+'</span><span class="section"><i></i>'+s.dataset.group+'</span>';
+  s.prepend(top);
+  const f=document.createElement('div');f.className='footer';
+  const last=i===total-1;
+  f.innerHTML='<span>FLEX gaia様向け ご提案資料</span><span class="nav"><button data-prev aria-label="前のページ">‹ 前へ</button><span class="num">'+(i+1)+' / '+total+'</span><button data-next aria-label="'+(last?'最初のページへ':'次のページ')+'">'+(last?'表紙へ ›':'次へ ›')+'</button><button data-overview>一覧</button></span>';
+  s.append(f);
+  s.setAttribute('aria-label',(i+1)+'. '+s.dataset.title);
+});
+
+/* 一覧パネル */
+const groups={};
+slides.forEach((s,i)=>{(groups[s.dataset.group]??=[]).push([i,s.dataset.title])});
+document.getElementById('panelGroups').innerHTML=Object.entries(groups).map(([g,items])=>
+  '<div><h3>'+g+'</h3>'+items.map(([i,t])=>'<button data-go="'+i+'"><i>'+String(i+1).padStart(2,'0')+'</i>'+t+'</button>').join('')+'</div>').join('');
+
+/* 詳細ドロワーの中身 */
+const details={
+  themes:{kicker:'支援1　集客',title:'記事テーマの例',sections:[
+    ['工法・建物を知ってもらう','「RC-Z工法とは」「RC造と木造・鉄骨造の違い」「RC造の住まいの暮らし心地」など、工法の特徴を分かりやすく解説します。'],
+    ['賃貸併用住宅を検討している人へ','「賃貸併用住宅の仕組み」「自宅と賃貸部分の間取りの考え方」「家賃収入を含めた資金計画の考え方」など、検討時の疑問に答えます。'],
+    ['相談前の不安を減らす','「相談から完成までの流れ」「土地探しからの相談」「よくある質問」をまとめ、住宅相談に進みやすくします。']],
+    note:'テーマは例です。打合せで伺った内容と御社の資料をもとに決め、価格・収支などの記載は御社のご確認を経て公開します。'},
+  roles:{kicker:'支援1　集客',title:'毎月の役割分担',sections:[
+    ['月1回の打合せ（約1時間）','お客様からよく受ける質問、工法の特徴、現場での工夫などを伺い、その月の4本のテーマを決めます。'],
+    ['当社が担当すること','記事の構成・執筆・修正・公開作業、FAQとSNS原稿への展開、アクセス解析と問い合わせの計測、結果の共有と翌月の改善提案。'],
+    ['御社にお願いすること','打合せへの参加、原稿の事実確認（1本15分程度を想定）、写真・図面・実例などの素材のご提供、サイトや計測ツールの権限のご共有。'],
+    ['開始時に決めること','記事の文字量、確認の回数、SNSの投稿先と本数。動画を制作する場合は、撮影・編集の範囲を別途ご相談します。']],
+    note:'確認時間は試算上の想定です。実際の時間は開始後に確認します。'},
+  ops:{kicker:'支援3　業務効率化',title:'業務効率化の例',sections:[
+    ['管理表を整える','顧客・案件・見積・原価・契約・着金を一つの管理表にまとめ、「どの案件がいまどの段階か」「入金はいつか」を一覧で確認できるようにします。'],
+    ['AIで作業を短くする','打合せの録音やメモから議事録と次の対応をまとめる、問い合わせの内容を分類して返信の下書きをつくる、CSVの転記や集計をまとめて行う、などです。'],
+    ['開発が必要になったら','Excelでは管理しきれなくなった業務は、効果・費用・運用の手間を比べて判断します。個別開発は無償提供の対象外で、別途お見積りします。']],
+    note:'AIの出力は、実際に使う前に必ず人が確認する運用とします。'},
+  course:{kicker:'支援4　研修',title:'研修後の活用例と、AI顧問との組み合わせ',sections:[
+    ['御社の仕事を題材に','打合せ記録の整理、問い合わせ内容の分類と返信の下書き、案件一覧の転記・集計など、身近な業務を題材に演習します。'],
+    ['日常の改善は御社で','手順と動作確認の考え方を身につけ、小さな改善を自社で試しながら進められる状態を目指します。'],
+    ['難しい部分はAI顧問として伴走','設計が難しい処理や、既存のシステムとの連携が必要な場合は、範囲を確認して当社が支援します。企業研修は全員向け、個別研修は担当者の業務に合わせて内容を調整します。']],
+    note:'研修の費用・回数・時間・対象人数、利用するツールの費用はお見積りで明記します。'},
+  start:{kicker:'数字と進め方',title:'ご相談から開始までの流れ',sections:[
+    ['1. 現状の確認','現在のサイト、集客の経路、採用の予定、業務の状況を伺い、最初に取り組むテーマを決めます。'],
+    ['2. 条件の合意','無償で支援する期間、制作の範囲、事例として掲載する範囲、インタビューの方法などを書面で確認します。'],
+    ['3. 初期の準備','サイトの情報、問い合わせ導線、Google Analytics・Search Consoleなどの計測環境を確認し、現状の数字を記録します。'],
+    ['4. 毎月の制作と改善','打合せ、制作、御社のご確認、公開、結果の共有を毎月繰り返します。']],
+    note:'開始日程は、サイトの状態と必要な資料・権限のご準備状況に合わせて決めます。'},
+  scope:{kicker:'事例協力の条件',title:'支援範囲と、事例掲載について',sections:[
+    ['無償でご提供するもの','通常月額10万円のAI顧問を、合意した期間ご提供します。月1回の打合せと記事4本を基本に、FAQ・SNS原稿・問い合わせ導線の整備と計測・改善、採用・業務効率化の支援を、優先順位を決めて進めます。'],
+    ['無償の対象に含まないもの','企業研修・個別研修（生成AI講座・Claude Code講座）、個別のシステム開発、広告費・求人媒体の掲載費・有料ツール等の実費。必要な場合は、着手前に内容と費用をご相談します。'],
+    ['事例として掲載するもの','社名と取り組み内容を、当社ホームページとYouTubeで紹介します。記事・動画の形式や撮影方法は、ご相談のうえ決めます。'],
+    ['公開前の確認と掲載範囲','原稿・動画は公開前に御社にご確認いただきます。写真、成果数値、お客様情報、社内情報は、許可をいただいた範囲だけを掲載します。'],
+    ['期間終了後','継続するかどうかは、振り返りのうえで改めてご相談します。自動的に有料契約へ移行することはありません。']],
+    note:'本資料の期間・回数・時間は提案段階の案です。条件は双方で合意したうえで確定します。'}
+};
+
+function go(n){
+  closeDetail(false);closePanel(false);
+  page=(n+total)%total;
+  slides.forEach((s,i)=>{const on=i===page;s.classList.toggle('active',on);s.setAttribute('aria-hidden',on?'false':'true')});
+  history.replaceState(null,'','#p'+(page+1));
+  window.scrollTo(0,0);
+}
+function showDetail(key){
+  const d=details[key];if(!d)return;
+  lastFocus=document.activeElement;
+  document.getElementById('detail').innerHTML='<p class="d-kicker">'+d.kicker+'</p><h2 id="detailTitle">'+d.title+'</h2>'+
+    d.sections.map(s=>'<h3>'+s[0]+'</h3><p>'+s[1]+'</p>').join('')+'<p class="d-note">'+d.note+'</p>';
+  const dr=document.getElementById('drawer');dr.scrollTop=0;
+  document.getElementById('scrim').classList.add('open');dr.classList.add('open');dr.setAttribute('aria-hidden','false');
+  document.getElementById('closeDetail').focus();
+}
+function closeDetail(restore=true){
+  const dr=document.getElementById('drawer');if(!dr.classList.contains('open'))return;
+  dr.classList.remove('open');dr.setAttribute('aria-hidden','true');document.getElementById('scrim').classList.remove('open');
+  if(restore&&lastFocus)lastFocus.focus();lastFocus=null;
+}
+function showPanel(){
+  closeDetail(false);lastFocus=document.activeElement;
+  const p=document.getElementById('panel');
+  p.querySelectorAll('[data-go]').forEach(b=>b.setAttribute('aria-current',Number(b.dataset.go)===page?'true':'false'));
+  p.classList.add('open');p.setAttribute('aria-hidden','false');document.getElementById('closePanel').focus();
+}
+function closePanel(restore=true){
+  const p=document.getElementById('panel');if(!p.classList.contains('open'))return;
+  p.classList.remove('open');p.setAttribute('aria-hidden','true');
+  if(restore&&lastFocus)lastFocus.focus();lastFocus=null;
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.go!==undefined)go(Number(b.dataset.go));
+  else if(b.dataset.detail)showDetail(b.dataset.detail);
+  else if(b.hasAttribute('data-next'))go(page+1);
+  else if(b.hasAttribute('data-prev'))go(page-1);
+  else if(b.hasAttribute('data-overview'))showPanel();
+});
+document.getElementById('closeDetail').onclick=()=>closeDetail();
+document.getElementById('scrim').onclick=()=>closeDetail();
+document.getElementById('closePanel').onclick=()=>closePanel();
+document.addEventListener('keydown',e=>{
+  if(e.target.matches('input,textarea,select'))return;
+  if(e.key==='Escape'){closeDetail();closePanel();return}
+  if(document.getElementById('drawer').classList.contains('open')||document.getElementById('panel').classList.contains('open'))return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&!e.target.matches('button'))){e.preventDefault();go(page+1)}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp')go(page-1);
+  else if(e.key==='Home')go(0);
+  else if(e.key==='End')go(total-1);
+  else if(e.key.toLowerCase()==='o')showPanel();
+});
+/* スワイプ（スマートフォン） */
+let tx=null,ty=null;
+document.addEventListener('touchstart',e=>{if(e.target.closest('input,.drawer,.panel'))return;tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;tx=null;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.5)go(page+(dx<0?1:-1))},{passive:true});
+
+/* 試算 */
+const DEFAULTS={visits:'1000',cvr:'1',win:''};
+function num(id,max=Infinity){const v=document.getElementById(id).value;if(v==='')return null;const n=Number(v);return Number.isFinite(n)?Math.min(max,Math.max(0,n)):null}
+const fmt=n=>n.toLocaleString('ja-JP',{maximumFractionDigits:1});
+function updateCalc(){
+  const v=num('visits')??0,c=num('cvr',100)??0,w=num('win',100);
+  const q=v*c/100;
+  document.getElementById('outInq').innerHTML=fmt(q)+'<span>件／月</span>';
+  if(w===null){document.getElementById('outWin').textContent='―';document.getElementById('outWinNote').textContent='成約率を入力すると表示します（問い合わせ数 × 成約率）';}
+  else{document.getElementById('outWin').innerHTML=fmt(q*w/100)+'<span>件／月</span>';document.getElementById('outWinNote').textContent='問い合わせ数 × 成約率（小数は計算上の値です）';}
+}
+document.querySelectorAll('.inputs input').forEach(x=>x.addEventListener('input',updateCalc));
+document.getElementById('resetCalc').onclick=()=>{Object.entries(DEFAULTS).forEach(([k,v])=>document.getElementById(k).value=v);updateCalc()};
+updateCalc();
+
+const m=location.hash.match(/^#p(\d+)$/);go(m?Number(m[1])-1:0);
+</script>
+</body>
+</html>
